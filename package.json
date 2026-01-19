@@ -1,0 +1,23 @@
+{
+  "name": "@pavlov/design-system",
+  "version": "1.0.0",
+  "description": "Unified design system for Pavlov projects",
+  "private": true,
+  "peerDependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.0",
+    "@tailwindcss/typography": "^0.5.0"
+  },
+  "keywords": [
+    "design-system",
+    "react",
+    "tailwindcss",
+    "components"
+  ]
+}

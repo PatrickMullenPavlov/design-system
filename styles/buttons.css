@@ -1,0 +1,68 @@
+/* Gradient animated button - primary CTA with animated gradient on hover */
+.CampaignButton {
+  transition:
+    background-position 0.45s ease-in-out 0s,
+    box-shadow 0.45s cubic-bezier(0.215, 0.61, 0.355, 1) 0s,
+    border-color 0.45s cubic-bezier(0.215, 0.61, 0.355, 1) 0s,
+    color 0.45s cubic-bezier(0.215, 0.61, 0.355, 1) 0s,
+    opacity 0.45s cubic-bezier(0.215, 0.61, 0.355, 1) 0s,
+    background-color 0.45s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+  background: linear-gradient(
+    270deg,
+    #1e293b 0%,
+    #545c69 50%,
+    #ffe8c7 75%,
+    #ffc2fc 100%
+  );
+  background-size: 360% 100%;
+  background-position: 99% 0;
+  @apply text-white;
+}
+
+.CampaignButton:hover,
+.CampaignButton:active {
+  background-position: 0 0;
+  @apply text-body-text;
+}
+
+/* Secondary gradient button - lighter gradient for secondary actions */
+.PauseButton {
+  transition: all 0.45s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background: linear-gradient(
+      270deg,
+      #dededd 0%,
+      #e8e8e7 50%,
+      #ffe8c7 75%,
+      #ffc2fc 100%
+    )
+    0 0 / 400% 100%;
+  @apply text-body-text;
+}
+
+.PauseButton:hover {
+  background-position: 99% 0;
+}
+
+.PauseButton:active {
+  background: #1e293b;
+  color: white;
+}
+
+/* Marketing CTA button - solid dark with hover to accent */
+.CTAButton {
+  @apply text-white bg-body-text hover:bg-[#FBFC7C] hover:text-body-text font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center animate;
+}
+
+/* Inverted CTA button - white background for dark sections */
+.whiteCTAButton {
+  @apply text-body-text bg-white hover:bg-[#FBFC7C] hover:text-body-text rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center animate;
+}
+
+/* Gradient hover effect - subtle shadow animation */
+.GradientHover:hover {
+  box-shadow:
+    0px 0px 8px rgba(255, 232, 200, 0.15),
+    -4px -4px 8px rgba(253, 133, 133, 0.15),
+    4px 4px 8px rgba(255, 194, 252, 0.3);
+  @apply animate;
+}

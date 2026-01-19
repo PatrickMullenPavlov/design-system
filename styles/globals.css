@@ -1,0 +1,161 @@
+@import "./buttons.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family:
+    Helvetica Neue,
+    Inter,
+    -apple-system,
+    Roboto,
+    BlinkMacSystemFont,
+    SF Pro,
+    Segoe UI,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  @apply bg-pavlov-bg text-body-text;
+}
+
+/* Animation utility */
+.animate {
+  @apply transition duration-500 ease-in-out;
+}
+
+/* Link transitions */
+a {
+  -o-transition: 0.5s ease;
+  -ms-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+/* Form label styles */
+label {
+  font-size: 13px;
+  line-height: 20px;
+  @apply mb-2 block font-medium text-body-text;
+}
+
+/* Heading styles */
+h2 {
+  font-size: 20px;
+  line-height: 24px;
+  @apply font-bold tracking-tight text-body-text;
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 20px;
+  @apply font-bold tracking-normal text-body-text;
+}
+
+/* Button size utilities */
+.btn-lg {
+  @apply animate rounded-full px-4 py-3 text-center text-sm font-semibold tracking-tight flex align-middle items-center justify-center;
+}
+
+.btn-md {
+  @apply animate rounded-full px-3.5 py-2 font-medium text-center text-[12px] tracking-wide flex align-middle items-center justify-center;
+}
+
+.btn-sm {
+  @apply animate rounded-full px-4 py-2 text-center text-xs font-semibold tracking-tight flex align-middle items-center justify-center;
+}
+
+/* Tag utility */
+span.tag {
+  text-transform: uppercase;
+  font-size: 9px;
+  line-height: 12px;
+  @apply ml-2 inline-flex items-center rounded-full bg-blue-50 px-3 py-1 font-normal tracking-wider text-blue-700;
+}
+
+/* Focus state overrides for cleaner appearance */
+[type="text"]:focus,
+select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Loading spinner */
+.spinner {
+  border-top: 3px solid #ffffff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  @apply border-t border-body-text;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Text gradient utilities (from marketing) */
+.gradient {
+  background: linear-gradient(160deg, #26292d 0%, #26292d 25%, #808582 100%);
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Scrollbar utilities */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
