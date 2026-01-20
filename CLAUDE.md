@@ -138,6 +138,66 @@ The font is included in `styles/fonts/Circular/` and loaded via `styles/fonts.cs
 
 ---
 
+### Icons: Heroicons
+
+**Use Heroicons (`@heroicons/react`) for all icons.** This library is a required dependency.
+
+```jsx
+import { PencilIcon, TrashIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
+
+// Standard icon size
+<PencilIcon className="h-5 w-5" />
+
+// In a button
+<button className="flex items-center gap-2">
+  <PlusIcon className="h-4 w-4" />
+  Add Item
+</button>
+
+// With action color
+<PencilIcon className="h-5 w-5 text-action-color" />
+```
+
+**Icon sizes:**
+| Size | Class | Usage |
+|------|-------|-------|
+| Small | `h-4 w-4` | Inline with text, buttons |
+| Default | `h-5 w-5` | Standard UI icons |
+| Large | `h-6 w-6` | Prominent actions, navigation |
+
+**Available variants:**
+- `@heroicons/react/24/outline` - Line icons (default, most common)
+- `@heroicons/react/24/solid` - Filled icons (for active/selected states)
+- `@heroicons/react/20/solid` - Smaller filled icons
+
+---
+
+### Action Color
+
+**The action color (`#8F8871`) is used for interactive elements that invite user action.**
+
+```jsx
+// Links and interactive text
+<a className="text-action-color hover:underline">View details</a>
+
+// Icons that indicate interactivity
+<PencilIcon className="h-5 w-5 text-action-color" />
+
+// Subtle emphasis on actionable items
+<span className="text-action-color font-medium">Edit</span>
+```
+
+**Use `text-action-color` for:**
+- Text links
+- Interactive icons
+- Call-to-action text
+- Hover states on neutral elements
+
+**Don't use for:** Primary buttons (use the button components), status indicators, or body text.
+
+---
+
 ### Color System
 
 **IMPORTANT: Default Tailwind colors have been completely replaced.**
@@ -248,6 +308,48 @@ bg-white → bg-pavlov-bg-lightest → bg-pavlov-bg-lighter → bg-pavlov-bg-lig
 
 ---
 
+#### Container & Card Styling
+
+**CRITICAL: Never use outline-only containers.**
+
+Boxes, cards, and containers must NEVER have:
+- A solid or dashed border with no fill/background
+- An outline style that creates an empty box
+
+**Always use one of these approaches:**
+
+1. **Light background (preferred for most cases):**
+```jsx
+// ✅ Card with light fill
+<div className="bg-pavlov-bg-lighter rounded-lg p-4">
+  Content here
+</div>
+
+// ✅ Use the Card component
+<Card>Content here</Card>
+```
+
+2. **Flash pattern (preferred for feature cards, visual interest):**
+```jsx
+// ✅ Subtle diagonal stripe pattern - no border needed
+<div className="flash rounded-lg p-6">
+  <h3 className="font-bold text-body-text">Feature Title</h3>
+  <p className="text-body-text-light">Description text</p>
+</div>
+```
+
+The `.flash` class creates a subtle 45-degree stripe pattern that provides visual definition without heavy borders.
+
+**Hierarchy of container styles:**
+| Style | Use Case |
+|-------|----------|
+| `flash` | Feature cards, marketing sections, visual emphasis |
+| `bg-pavlov-bg-lighter` | Standard cards, sidebars, panels |
+| `bg-white` | Forms, modals, elevated content |
+| `bg-pavlov-bg-light` | Subtle grouping, selected states |
+
+---
+
 #### Forbidden Patterns
 
 **Colors:**
@@ -270,13 +372,29 @@ bg-white → bg-pavlov-bg-lightest → bg-pavlov-bg-lighter → bg-pavlov-bg-lig
 <p className="text-body-text-lighter">...</p>
 ```
 
+**Containers:**
+```jsx
+// ❌ NEVER use outline-only containers (border with no fill)
+<div className="border border-gray-200 rounded-lg p-4">...</div>
+<div className="border border-dashed border-gray-300 rounded-lg">...</div>
+<div className="ring-1 ring-gray-200 rounded-lg">...</div>
+
+// ✅ ALWAYS use a background fill or the flash pattern
+<div className="bg-pavlov-bg-lighter rounded-lg p-4">...</div>
+<div className="flash rounded-lg p-4">...</div>
+<Card>...</Card>
+```
+
 **Borders:**
 ```jsx
 // ❌ NEVER use dark borders on light cards
 <div className="bg-white border border-gray-400">...</div>
 
-// ✅ Use subtle borders
+// ✅ Use subtle borders only when needed (prefer no border with bg fill)
 <div className="bg-white border border-rule-color">...</div>
+
+// ✅ Better: use background fill without border
+<div className="bg-pavlov-bg-lighter rounded-lg">...</div>
 ```
 
 **What "muted" means:**
@@ -615,11 +733,19 @@ const [isOpen, setIsOpen] = useState(false);
 
 ### Cards
 
+**IMPORTANT:** Cards must NEVER have outline-only borders. Always use a background fill or the flash pattern.
+
 ```jsx
-// Static card
+// Standard card (light background fill)
 <Card>
   <h3 className="text-body-text font-bold mb-2">Card Title</h3>
   <p className="text-body-text-light">Card content goes here.</p>
+</Card>
+
+// Flash variant (diagonal stripe pattern - great for feature cards)
+<Card variant="flash">
+  <h3 className="text-body-text font-bold mb-2">Feature Card</h3>
+  <p className="text-body-text-light">Subtle stripe pattern for visual interest.</p>
 </Card>
 
 // Clickable card
@@ -632,13 +758,20 @@ const [isOpen, setIsOpen] = useState(false);
 <Card bgColor="bg-blue-10">
   <p>Blue tinted card</p>
 </Card>
+
+// ❌ NEVER do this (outline-only)
+<div className="border border-gray-200 rounded-lg p-4">...</div>
 ```
 
 ---
 
 ## Spacing Conventions
 
-Use Tailwind's spacing scale consistently:
+**CRITICAL: All padding and margin values must be EVEN numbers.**
+
+Never use odd pixel values: ~~9px~~, ~~11px~~, ~~13px~~, ~~15px~~, ~~17px~~
+
+Use Tailwind's spacing scale consistently (all values are even):
 
 ```
 Padding/Margin:
@@ -654,6 +787,32 @@ Gaps:
 
 Vertical spacing between form fields: pb-4
 Vertical spacing between sections: py-8 or py-12
+```
+
+**Allowed Tailwind spacing values:**
+| Class | Pixels | Use |
+|-------|--------|-----|
+| `1` | 4px | Minimal spacing |
+| `2` | 8px | Tight spacing |
+| `3` | 12px | Small spacing |
+| `4` | 16px | Default spacing |
+| `5` | 20px | Medium spacing |
+| `6` | 24px | Relaxed spacing |
+| `8` | 32px | Spacious spacing |
+| `10` | 40px | Large spacing |
+| `12` | 48px | Section spacing |
+
+**Forbidden:**
+```jsx
+// ❌ NEVER use arbitrary odd values
+<div className="p-[9px]">...</div>
+<div className="p-[13px]">...</div>
+<div style={{ padding: '11px' }}>...</div>
+
+// ✅ Use Tailwind's even scale
+<div className="p-2">...</div>  // 8px
+<div className="p-3">...</div>  // 12px
+<div className="p-4">...</div>  // 16px
 ```
 
 ---
@@ -691,27 +850,34 @@ Error:    red-10 (bg), red (text)
 
 ## Don'ts
 
-1. **Never invent new colors** - Use only colors from the palette in `tailwind.config.js`
+1. **Never use outline-only containers** - Cards and boxes must have a background fill or use `.flash`:
+   ```
+   ❌ <div className="border border-gray-200 rounded-lg">
+   ✅ <div className="bg-pavlov-bg-lighter rounded-lg">
+   ✅ <div className="flash rounded-lg">
+   ```
 
-2. **Never use arbitrary values for spacing** - Use Tailwind's spacing scale (2, 4, 6, 8, etc.)
+2. **Never invent new colors** - Use only colors from the palette in `tailwind.config.js`
 
-3. **Never create custom button styles** - Use `PrimaryButton`, `SecondaryButton`, or the CSS classes
+3. **Never use arbitrary values for spacing** - Use Tailwind's spacing scale (2, 4, 6, 8, etc.)
 
-4. **Never hardcode colors** - Always use the semantic color names:
+4. **Never create custom button styles** - Use `PrimaryButton`, `SecondaryButton`, or the CSS classes
+
+5. **Never hardcode colors** - Always use the semantic color names:
    ```
    ❌ text-[#262A33]
    ✅ text-body-text
    ```
 
-5. **Never skip the design system components** - Don't create one-off styled elements:
+6. **Never skip the design system components** - Don't create one-off styled elements:
    ```
    ❌ <input className="border p-2 rounded" />
    ✅ <Input value={value} onChange={setValue} />
    ```
 
-6. **Never mix heading approaches** - Always use `SectionHeader` for headings
+7. **Never mix heading approaches** - Always use `SectionHeader` for headings
 
-7. **Never use inline styles for layout** - Use Tailwind classes and the layout components
+8. **Never use inline styles for layout** - Use Tailwind classes and the layout components
 
 ---
 

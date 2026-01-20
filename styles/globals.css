@@ -148,6 +148,19 @@ select:focus {
   color: transparent;
 }
 
+/* Container patterns */
+.flash {
+  background-color: transparent;
+  background-size: 4px 4px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #f1f1f1 0,
+    #f1f1f1 1px,
+    #ffffff 0,
+    #ffffff 50%
+  );
+}
+
 /* Scrollbar utilities */
 .scrollbar-none {
   scrollbar-width: none;

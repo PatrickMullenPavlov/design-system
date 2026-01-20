@@ -20,10 +20,12 @@ module.exports = {
       // Rule/border color
       "rule-color": "#EDEEEC",
 
+      // Action color - for interactive elements, links, CTAs
+      "action-color": "#8F8871",
+
       // Active states
       "active-blue": "#4A5568",
       "active-color": "#C45D4A",
-      yellow: "#8F8871",
 
       // Body text - muted, warm charcoal tones
       "body-text": {
