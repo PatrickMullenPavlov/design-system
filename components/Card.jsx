@@ -11,7 +11,7 @@ import { cx } from "../utils/cx";
  *
  * @param {React.ReactNode} children - Card content
  * @param {string} [variant="default"] - Card style: "default" | "flash"
- * @param {string} [bgColor="bg-pavlov-bg-lighter"] - Background color class (ignored if variant="flash")
+ * @param {string} [bgColor="bg-trig-bg-lighter"] - Background color class (ignored if variant="flash")
  * @param {string} [classNames=""] - Additional CSS classes
  * @param {function} [onClick] - Optional click handler (enables hover state)
  */
@@ -23,7 +23,7 @@ export const CARD_PADDING = "1rem";
 export default function Card({
   children,
   variant = "default",
-  bgColor = "bg-pavlov-bg-lighter",
+  bgColor = "bg-trig-bg-lighter",
   classNames = "",
   onClick,
 }) {
@@ -37,7 +37,7 @@ export default function Card({
         isFlash ? "flash" : bgColor,
         classNames,
         onClick && "cursor-pointer",
-        onClick && !isFlash && "hover:bg-pavlov-bg"
+        onClick && !isFlash && "hover:bg-trig-bg"
       )}
       onClick={onClick}
     >

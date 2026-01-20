@@ -1,6 +1,6 @@
-# Pavlov Design System
+# Trig Design System
 
-A unified design system care package for Pavlov projects. This package provides consistent styling, components, and patterns for React applications.
+A unified design system care package for Trig projects. This package provides consistent styling, components, and patterns for React applications.
 
 ## Quick Start
 
@@ -93,7 +93,7 @@ import './design-system/styles/globals.css';
 ```markdown
 ## Design System
 
-This project uses the Pavlov Design System located at `src/design-system/`.
+This project uses the Trig Design System located at `src/design-system/`.
 
 **IMPORTANT:** Before building any UI, read `src/design-system/CLAUDE.md` for:
 - Component usage rules and patterns

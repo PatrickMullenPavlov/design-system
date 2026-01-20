@@ -22,7 +22,7 @@
 body {
   padding: 0;
   margin: 0;
-  @apply bg-pavlov-bg text-body-text;
+  @apply bg-trig-bg text-body-text;
 }
 
 /* Animation utility */
@@ -159,6 +159,75 @@ select:focus {
     #ffffff 0,
     #ffffff 50%
   );
+}
+
+/* Texture utilities - for warmth and craft */
+
+/* Film grain overlay - use on marketing/communications materials */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Subtle grain - for lighter application */
+.grain-subtle::after {
+  opacity: 0.04;
+}
+
+/* Heavy grain - for dramatic effect */
+.grain-heavy::after {
+  opacity: 0.15;
+}
+
+/* Hatching pattern - for cube surfaces and illustrations */
+.hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    currentColor 2px,
+    currentColor 3px
+  );
+  background-size: 6px 6px;
+}
+
+.hatch-dense {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 1px,
+    currentColor 1px,
+    currentColor 2px
+  );
+  background-size: 4px 4px;
+}
+
+/* Cross-hatch pattern */
+.crosshatch {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      currentColor 2px,
+      currentColor 3px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 2px,
+      currentColor 2px,
+      currentColor 3px
+    );
+  background-size: 6px 6px;
 }
 
 /* Scrollbar utilities */

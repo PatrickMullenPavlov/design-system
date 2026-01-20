@@ -1,7 +1,7 @@
 {
-  "name": "@pavlov/design-system",
+  "name": "@trig/design-system",
   "version": "1.0.0",
-  "description": "Unified design system for Pavlov projects",
+  "description": "Unified design system for Trig projects",
   "private": true,
   "peerDependencies": {
     "@headlessui/react": "^2.2.0",

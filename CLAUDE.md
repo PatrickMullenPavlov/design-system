@@ -1,6 +1,115 @@
-# Design System - Claude Agent Instructions
+# Trig Design System - Claude Agent Instructions
 
-This document provides prescriptive rules for maintaining consistent styling across all Pavlov projects. Follow these patterns exactly.
+This document provides prescriptive rules for maintaining consistent styling across all Trig projects. Follow these patterns exactly.
+
+---
+
+## Brand Philosophy
+
+**The name "Trig" combines trigonometry (precision, geometry, mathematical foundations) and triggers (product actions that drive engagement). This duality — precision meets action — runs through everything.**
+
+### The Generative Principle
+
+**Simple units combine into complex meaning.**
+
+This is the philosophical and visual foundation. Individual cubes become icons. Icons become patterns. Patterns become systems. This mirrors the product: individual signals combine into patterns and insights.
+
+### What Trig Stands For
+
+1. **Precision over ambiguity** — AI is mathematical, structured, knowable
+2. **Confidence over hedging** — Bold statements, clear positions
+3. **Systematic over decorative** — Every element earns its place
+4. **Craft over clinical** — Warmth through texture and care, not softness
+
+### The Core Tension We Resolve
+
+Most AI branding falls into two traps:
+- **Cold and robotic** — clinical, impersonal, intimidating
+- **Amorphous and mystical** — glowing gradients, undefined shapes, AI-as-magic
+
+**Trig rejects both.** AI is precise and mathematical, not vague or sentient. But precision doesn't mean cold. The brand is sophisticated and powerful, but never complicated.
+
+---
+
+## Visual System: The Cube
+
+The **isometric cube** is the atomic unit of Trig's visual language.
+
+### Cube Characteristics
+- Line-drawn (not filled, not 3D-rendered)
+- Isometric perspective (consistent, mathematical)
+- Combinable (cubes join to form more complex shapes)
+
+### Cube Applications
+
+**Icons:** Built from cube combinations. Each icon should feel like it could be disassembled into its constituent geometric parts. Use hatching and line patterns to differentiate surfaces.
+
+**Patterns:** Cube wireframes can extend into background patterns — connected grids, tessellations, or floating arrangements. These should feel architectural and structured, never random or scattered.
+
+**Diagrams:** When explaining concepts or flows, use the same isometric, geometric language. Prefer architectural/diagrammatic clarity over abstract symbolism.
+
+### Cube Variants
+- Pure wireframe
+- Filled with hatching or texture patterns
+- Combined into icons representing product concepts
+- Arranged into larger compositional patterns
+
+---
+
+## Framework Device: Periodic Table Treatment
+
+For conceptual structures (like "Identify → Act → Measure"), use a **periodic table treatment**:
+
+```
+┌────┐  ┌────┐  ┌────┐
+│ Id │  │ Ac │  │ Ms │
+│ 01 │→ │ 02 │→ │ 03 │
+└────┘  └────┘  └────┘
+```
+
+- Abbreviated labels (Id, Ac, Ms)
+- Boxed/bordered elements
+- Sequential numbering (01, 02, 03)
+- Connected by arrows or lines
+
+This positions concepts as fundamental building blocks — elemental, precise, scientific.
+
+---
+
+## Tone of Voice
+
+### Guiding Principles
+
+1. **Simple** — Make complexity feel navigable. Even magical.
+2. **Authentic** — Disruptive because we believe differently, not for its own sake.
+3. **Honest** — Open and direct. Trust through clarity.
+
+### How We Speak
+
+| Trait | Meaning |
+|-------|---------|
+| **Human** | Everyday words. Bend grammar rules if it sounds more natural. No jargon. |
+| **Concise** | 100% clarity, minimum words. Write headlines as if subcopy is illegal. |
+| **Energetic** | Ambitious, pacey, direct. Infectious confidence without arrogance. |
+| **Modern** | Light-hearted when earned. A well-chosen reference or moment of wit. Never forced. |
+
+### AI Positioning in Copy
+
+AI is good news. It opens possibilities. It lets you do things you couldn't before.
+
+- This is **not** about replacing humans
+- This is **not** inevitable obsolescence
+- This **is** augmentation, scale, precision
+
+The future is now, and it's already here. Not cold, not distant. Tangible and real.
+
+### Typography in Copy
+
+**Exclamation first, information second.** Lead with the bold statement. Support with detail.
+
+**Let numbers speak.** Statistics and metrics should be displayed large and confident. They are proof points, not footnotes.
+
+**Headlines hook, body supports.** Headlines can be dramatic and abbreviated. Body copy provides the full context.
 
 ---
 
@@ -106,7 +215,7 @@ These principles are mandatory. They come from [Vercel's Design Guidelines](http
 
 ### Typeface: Circular
 
-**Circular is the Pavlov brand typeface. It must be used for ALL text across all projects.**
+**Circular is the Trig brand typeface. It must be used for ALL text across all projects.**
 
 The font is included in `styles/fonts/Circular/` and loaded via `styles/fonts.css`.
 
@@ -202,7 +311,7 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 **IMPORTANT: Default Tailwind colors have been completely replaced.**
 
-The Pavlov palette uses **muted, warm tones** exclusively. All colors have:
+The Trig palette uses **muted, warm tones** exclusively. All colors have:
 - Reduced saturation (no bright/neon colors)
 - Warm undertones (slight yellow/brown shift)
 - Sophisticated, professional appearance
@@ -247,23 +356,23 @@ This creates a cohesive, sophisticated look that feels warm and approachable rat
 
 | Class | Usage | Context |
 |-------|-------|---------|
-| `bg-pavlov-bg` | Page background | The default app background (#f7f7f7) |
-| `bg-pavlov-bg-lighter` | Card/panel background | Containers, sidebars, elevated surfaces |
+| `bg-trig-bg` | Page background | The default app background (#f7f7f7) |
+| `bg-trig-bg-lighter` | Card/panel background | Containers, sidebars, elevated surfaces |
 | `bg-white` | Input background | Form fields, modals, prominent cards |
-| `bg-pavlov-bg-light` | Subtle highlight | Selected states, subtle differentiation |
-| `bg-pavlov-bg-dark` | Divider/separator | Very subtle visual breaks |
+| `bg-trig-bg-light` | Subtle highlight | Selected states, subtle differentiation |
+| `bg-trig-bg-dark` | Divider/separator | Very subtle visual breaks |
 
 **Hierarchy (light to dark):**
 ```
-bg-white → bg-pavlov-bg-lightest → bg-pavlov-bg-lighter → bg-pavlov-bg-light → bg-pavlov-bg → bg-pavlov-bg-dark → bg-pavlov-bg-darker
+bg-white → bg-trig-bg-lightest → bg-trig-bg-lighter → bg-trig-bg-light → bg-trig-bg → bg-trig-bg-dark → bg-trig-bg-darker
 ```
 
 **Rules:**
-- Page wrapper: Always `bg-pavlov-bg`
-- Cards & containers: `bg-pavlov-bg-lighter` or `bg-white`
+- Page wrapper: Always `bg-trig-bg`
+- Cards & containers: `bg-trig-bg-lighter` or `bg-white`
 - Inputs & form fields: `bg-white`
 - Disabled inputs: `bg-gray-50`
-- Never use dark backgrounds (`bg-pavlov-bg-darkest`, `bg-gray-900`) except for specific dark-mode sections
+- Never use dark backgrounds (`bg-trig-bg-darkest`, `bg-gray-900`) except for specific dark-mode sections
 
 ---
 
@@ -289,8 +398,8 @@ bg-white → bg-pavlov-bg-lightest → bg-pavlov-bg-lighter → bg-pavlov-bg-lig
 | Class | Context |
 |-------|---------|
 | `hover:bg-blue-10` | Interactive elements (links, buttons) |
-| `hover:bg-pavlov-bg` | Cards that are clickable |
-| `hover:bg-pavlov-bg-light` | Subtle hover on light backgrounds |
+| `hover:bg-trig-bg` | Cards that are clickable |
+| `hover:bg-trig-bg-light` | Subtle hover on light backgrounds |
 | `hover:bg-grey-200` | List items, table rows |
 | `hover:bg-red-10` | Destructive actions |
 | `hover:bg-green-10` | Confirm actions |
@@ -308,6 +417,71 @@ bg-white → bg-pavlov-bg-lightest → bg-pavlov-bg-lighter → bg-pavlov-bg-lig
 
 ---
 
+#### Communications Palette (Stankowski-style)
+
+**For marketing materials, campaigns, and whitepapers ONLY. Never use in product UI.**
+
+The communications palette provides vibrant, saturated colors inspired by Anton Stankowski's work. These colors are permitted for brand communications but must:
+- Always be paired with grain/noise texture
+- Fill angular shapes (not soft blobs)
+- Be structured by geometry
+
+| Color | Classes | Hex |
+|-------|---------|-----|
+| Magenta | `bg-comms-magenta`, `text-comms-magenta` | #EC4899 |
+| Cyan | `bg-comms-cyan`, `text-comms-cyan` | #22D3EE |
+| Green | `bg-comms-green`, `text-comms-green` | #22C55E |
+| Violet | `bg-comms-violet`, `text-comms-violet` | #8B5CF6 |
+| Amber | `bg-comms-amber`, `text-comms-amber` | #F59E0B |
+
+Each has `-light` and `-dark` variants (e.g., `bg-comms-magenta-light`).
+
+```jsx
+// ✅ Communications materials with texture
+<div className="bg-comms-cyan grain">
+  <h2 className="text-white font-bold">Marketing Hero</h2>
+</div>
+
+// ❌ NEVER in product UI
+<button className="bg-comms-magenta">Submit</button>
+```
+
+---
+
+#### Texture and Grain
+
+Texture adds warmth and craft. Grain makes digital surfaces feel analog.
+
+**Available utilities:**
+
+| Class | Effect | Usage |
+|-------|--------|-------|
+| `grain` | Film grain overlay (8% opacity) | Marketing heroes, cards |
+| `grain-subtle` | Lighter grain (4% opacity) | Subtle texture |
+| `grain-heavy` | Stronger grain (15% opacity) | Dramatic effect |
+| `hatch` | Diagonal line pattern | Cube surfaces, illustrations |
+| `hatch-dense` | Tighter diagonal lines | Smaller elements |
+| `crosshatch` | Cross-diagonal pattern | Complex surfaces |
+
+```jsx
+// Marketing section with grain
+<section className="bg-comms-violet grain">
+  <h1 className="text-white">Bold Statement</h1>
+</section>
+
+// Cube surface with hatching
+<div className="hatch text-grey-400">
+  {/* Isometric cube face */}
+</div>
+```
+
+**Rules:**
+- Always use `grain` with communications palette colors
+- `hatch` patterns use `currentColor` — set text color to control line color
+- Grain requires `position: relative` on the parent (already included in `.grain`)
+
+---
+
 #### Container & Card Styling
 
 **CRITICAL: Never use outline-only containers.**
@@ -321,7 +495,7 @@ Boxes, cards, and containers must NEVER have:
 1. **Light background (preferred for most cases):**
 ```jsx
 // ✅ Card with light fill
-<div className="bg-pavlov-bg-lighter rounded-lg p-4">
+<div className="bg-trig-bg-lighter rounded-lg p-4">
   Content here
 </div>
 
@@ -344,9 +518,9 @@ The `.flash` class creates a subtle 45-degree stripe pattern that provides visua
 | Style | Use Case |
 |-------|----------|
 | `flash` | Feature cards, marketing sections, visual emphasis |
-| `bg-pavlov-bg-lighter` | Standard cards, sidebars, panels |
+| `bg-trig-bg-lighter` | Standard cards, sidebars, panels |
 | `bg-white` | Forms, modals, elevated content |
-| `bg-pavlov-bg-light` | Subtle grouping, selected states |
+| `bg-trig-bg-light` | Subtle grouping, selected states |
 
 ---
 
@@ -359,7 +533,7 @@ The `.flash` class creates a subtle 45-degree stripe pattern that provides visua
 <div className="text-[#3B82F6]">...</div>
 
 // ✅ ALWAYS use palette colors
-<div className="bg-pavlov-bg">...</div>
+<div className="bg-trig-bg">...</div>
 <div className="text-blue-600">...</div>
 
 // ❌ NEVER import external color libraries or add bright colors
@@ -380,7 +554,7 @@ The `.flash` class creates a subtle 45-degree stripe pattern that provides visua
 <div className="ring-1 ring-gray-200 rounded-lg">...</div>
 
 // ✅ ALWAYS use a background fill or the flash pattern
-<div className="bg-pavlov-bg-lighter rounded-lg p-4">...</div>
+<div className="bg-trig-bg-lighter rounded-lg p-4">...</div>
 <div className="flash rounded-lg p-4">...</div>
 <Card>...</Card>
 ```
@@ -394,7 +568,7 @@ The `.flash` class creates a subtle 45-degree stripe pattern that provides visua
 <div className="bg-white border border-rule-color">...</div>
 
 // ✅ Better: use background fill without border
-<div className="bg-pavlov-bg-lighter rounded-lg">...</div>
+<div className="bg-trig-bg-lighter rounded-lg">...</div>
 ```
 
 **What "muted" means:**
@@ -434,7 +608,7 @@ Always use `SectionHeader` for page/section headings. Never create custom headin
 // Page title (hero)
 <SectionHeader
   size="xl"
-  title="Welcome to Pavlov"
+  title="Welcome to Trig"
   description="The customer engagement platform"
   alignment="center"
 />
@@ -822,9 +996,9 @@ Vertical spacing between sections: py-8 or py-12
 ### Backgrounds
 
 ```
-Page background:      bg-pavlov-bg
-Card background:      bg-pavlov-bg-lighter
-Hover background:     bg-pavlov-bg
+Page background:      bg-trig-bg
+Card background:      bg-trig-bg-lighter
+Hover background:     bg-trig-bg
 Input background:     bg-white
 Disabled background:  bg-gray-50
 ```
@@ -853,7 +1027,7 @@ Error:    red-10 (bg), red (text)
 1. **Never use outline-only containers** - Cards and boxes must have a background fill or use `.flash`:
    ```
    ❌ <div className="border border-gray-200 rounded-lg">
-   ✅ <div className="bg-pavlov-bg-lighter rounded-lg">
+   ✅ <div className="bg-trig-bg-lighter rounded-lg">
    ✅ <div className="flash rounded-lg">
    ```
 
@@ -878,6 +1052,28 @@ Error:    red-10 (bg), red (text)
 7. **Never mix heading approaches** - Always use `SectionHeader` for headings
 
 8. **Never use inline styles for layout** - Use Tailwind classes and the layout components
+
+9. **Never use amorphous gradients** - No radial gradients, no ambient washes, no glowing undefined shapes:
+   ```
+   ❌ background: radial-gradient(circle, #ff00ff, #00ffff)
+   ❌ Soft, blurry AI-style glows
+   ✅ Angular gradients with defined edges (comms only)
+   ✅ Solid colors with grain texture
+   ```
+
+10. **Never make AI feel mystical or sentient** - AI is mathematical, structured, knowable. Not magic.
+
+11. **Never scatter elements randomly** - Everything should feel intentionally placed, aligned to grids
+
+12. **Never use communications colors in product UI** - `comms-*` colors are for marketing only:
+    ```
+    ❌ <button className="bg-comms-magenta">Save</button>
+    ✅ <PrimaryButton label="Save" />
+    ```
+
+13. **Never use texture without purpose** - Grain should feel intentional, not like an Instagram filter
+
+14. **Never hedge in headlines** - Be direct and confident, not tentative
 
 ---
 

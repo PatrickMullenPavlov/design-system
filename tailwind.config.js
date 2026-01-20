@@ -44,7 +44,7 @@ module.exports = {
       },
 
       // Background - warm off-whites
-      "pavlov-bg": {
+      "trig-bg": {
         lightest: "rgba(255, 255, 255, 0.4)",
         lighter: "rgba(255, 255, 255, 0.6)",
         light: "rgba(255, 255, 255, 0.8)",
@@ -290,6 +290,47 @@ module.exports = {
         700: "#7F6F38",
         800: "#5E532C",
         900: "#3D3720",
+      },
+
+      // ============================================
+      // COMMUNICATIONS PALETTE (Stankowski-style)
+      // For marketing, campaigns, whitepapers only.
+      // NOT for product UI.
+      // ============================================
+
+      // Vibrant magenta - communications only
+      "comms-magenta": {
+        light: "#F472B6",
+        DEFAULT: "#EC4899",
+        dark: "#DB2777",
+      },
+
+      // Vibrant cyan - communications only
+      "comms-cyan": {
+        light: "#67E8F9",
+        DEFAULT: "#22D3EE",
+        dark: "#06B6D4",
+      },
+
+      // Vibrant green - communications only
+      "comms-green": {
+        light: "#86EFAC",
+        DEFAULT: "#22C55E",
+        dark: "#16A34A",
+      },
+
+      // Vibrant violet - communications only
+      "comms-violet": {
+        light: "#C4B5FD",
+        DEFAULT: "#8B5CF6",
+        dark: "#7C3AED",
+      },
+
+      // Vibrant amber - communications only
+      "comms-amber": {
+        light: "#FDE68A",
+        DEFAULT: "#F59E0B",
+        dark: "#D97706",
       },
     },
 
