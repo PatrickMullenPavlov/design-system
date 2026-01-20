@@ -10,7 +10,23 @@ A unified design system care package for Pavlov projects. This package provides 
 npm install @headlessui/react @heroicons/react tailwindcss @tailwindcss/forms @tailwindcss/typography
 ```
 
-### 2. Copy the Design System
+### 2. Install Required Design Tools
+
+These tools are **mandatory** for all projects using the design system:
+
+```bash
+# UI Skills - enforces consistent UI standards
+npx ui-skills init
+
+# RAMS - audits accessibility and visual design
+curl -fsSL https://rams.ai/install | bash
+```
+
+**Usage:**
+- Run `/ui-skills` or `/ui-skills <file>` to check UI constraints
+- Run `/rams` or `/rams <file>` before PRs to audit accessibility
+
+### 3. Copy the Design System
 
 Copy the entire `design-system` folder into your project, or copy individual pieces as needed:
 
@@ -25,7 +41,7 @@ your-project/
 │   └── ...
 ```
 
-### 3. Configure Tailwind
+### 4. Configure Tailwind
 
 Merge the design system's Tailwind config with your project's config. You can either:
 
@@ -56,7 +72,7 @@ module.exports = {
 };
 ```
 
-### 4. Import Global Styles
+### 5. Import Global Styles
 
 In your main CSS file or app entry point:
 
@@ -70,7 +86,7 @@ Or in your JavaScript entry:
 import './design-system/styles/globals.css';
 ```
 
-### 5. Configure Claude Code
+### 6. Configure Claude Code
 
 **This is the key step.** Add the design system rules to your project's `CLAUDE.md` file (create one if it doesn't exist):
 
@@ -94,7 +110,7 @@ Key rules:
 
 Claude will automatically read your project's `CLAUDE.md` and follow these rules. The detailed instructions in `design-system/CLAUDE.md` will guide component usage.
 
-### 6. Use Components
+### 7. Use Components
 
 ```jsx
 import TextInput from './design-system/components/forms/TextInput';

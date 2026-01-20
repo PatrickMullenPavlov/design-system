@@ -4,6 +4,104 @@ This document provides prescriptive rules for maintaining consistent styling acr
 
 ---
 
+## Required Tools
+
+**Every project using this design system MUST install and use these tools:**
+
+### 1. UI Skills (Constraint System)
+
+UI Skills enforces consistent, production-ready UI standards.
+
+```bash
+npx ui-skills init
+```
+
+**Usage:**
+- `/ui-skills` — Apply constraints to UI work in conversation
+- `/ui-skills <file>` — Review files against all constraints
+
+### 2. RAMS (Design Review CLI)
+
+RAMS audits for accessibility violations and visual design inconsistencies.
+
+```bash
+curl -fsSL https://rams.ai/install | bash
+```
+
+**Usage:**
+- `/rams` — Auto-detect and prompt for files to review
+- `/rams src/components/Button.jsx` — Review a specific file
+
+**Run RAMS before every PR** to catch accessibility issues, visual inconsistencies, and UI polish problems.
+
+---
+
+## Design Principles
+
+These principles are mandatory. They come from [Vercel's Design Guidelines](https://vercel.com/design/guidelines), [UI Skills](https://ui-skills.com), and [RAMS](https://rams.ai).
+
+### Interactions
+
+- **Keyboard accessibility is mandatory** — all flows must be keyboard-operable
+- **Visible focus indicators** — use `:focus-visible` to show focus without distracting pointer users
+- **Minimum hit targets** — 24px on desktop, 44px on mobile
+- **URL state persistence** — enable sharing and navigation restoration where appropriate
+- **Optimistic UI updates** — improve perceived responsiveness
+- **AlertDialog for destructive actions** — MUST use for irreversible operations
+- **Never block paste** — in `input` or `textarea` elements
+
+### Animations
+
+- **NEVER add animation unless explicitly requested**
+- **Honor motion preferences** — respect `prefers-reduced-motion`
+- **CSS over JavaScript** — prefer CSS animations when possible
+- **GPU-accelerated properties only** — animate only `transform` and `opacity`
+- **Maximum 200ms for interaction feedback**
+- **Never use `transition: all`** — explicitly list animated properties
+- **Use `motion/react`** for JavaScript animations when needed
+
+### Layout
+
+- **Optical alignment** — occasionally adjust by 1px when perception beats geometry
+- **Intentional alignment** — every element should align to grids or baselines
+- **Responsive design** — must cover mobile, laptop, and ultra-wide displays
+- **Browser-native sizing** — flexbox and grid beat JavaScript measurements
+- **Fixed z-index scales** — avoid arbitrary z-index values
+
+### Content & Accessibility
+
+- **Inline explanations over tooltips** — prefer visible text
+- **Design all states** — empty, sparse, dense, error, loading
+- **Semantic HTML first** — before reaching for ARIA
+- **Icon-only buttons need `aria-label`**
+- **Locale-aware formatting** — for dates, numbers, currencies
+- **Minimum contrast ratios** — 4.5:1 for text (prefer APCA over WCAG 2)
+- **Alt text for images** — never leave images unlabeled
+- **No skipped heading levels** — h1 → h2 → h3, never h1 → h3
+
+### Forms
+
+- **Labels on every control** — for accessibility
+- **Validation guides, not blocks** — help users, don't prevent input
+- **Submit buttons stay enabled** — until submission actually begins
+- **Password manager compatibility** — use proper `autocomplete` attributes
+
+### Performance
+
+- **Test on throttled/low-power devices**
+- **Virtualize large lists**
+- **Lazy-load images with explicit dimensions** — prevent layout shift
+- **Prioritize render logic over `useEffect`**
+
+### Component Rules
+
+- **Use accessible primitives** — for anything with keyboard or focus behavior
+- **Never mix primitive systems** — within the same interaction surface
+- **Use `cn` utility for class logic** — (equivalent to our `cx` function)
+- **Empty states need one clear action** — guide users on what to do next
+
+---
+
 ## Brand Fundamentals
 
 ### Typeface: Circular
