@@ -42,7 +42,27 @@ The font is included in `styles/fonts/Circular/` and loaded via `styles/fonts.cs
 
 ### Color System
 
-The Pavlov color palette is intentionally limited. Use ONLY these colors.
+**IMPORTANT: Default Tailwind colors have been completely replaced.**
+
+The Pavlov palette uses **muted, warm tones** exclusively. All colors have:
+- Reduced saturation (no bright/neon colors)
+- Warm undertones (slight yellow/brown shift)
+- Sophisticated, professional appearance
+
+Standard Tailwind colors like `blue-500`, `red-400`, `green-600` now point to our muted variants, not the default bright colors.
+
+#### Color Philosophy
+
+| Instead of... | We use... |
+|---------------|-----------|
+| Bright electric blue | Muted steel/slate blue |
+| Vivid red | Warm terracotta |
+| Neon green | Soft sage/olive |
+| Pure yellow | Golden amber |
+| Hot pink | Dusty rose |
+| Vibrant purple | Warm mauve/plum |
+
+This creates a cohesive, sophisticated look that feels warm and approachable rather than clinical or harsh.
 
 #### Text Colors (in order of usage)
 
@@ -132,26 +152,41 @@ bg-white → bg-pavlov-bg-lightest → bg-pavlov-bg-lighter → bg-pavlov-bg-lig
 
 #### Forbidden Patterns
 
+**Colors:**
 ```jsx
-// ❌ NEVER use numbered gray scales for text
-<p className="text-gray-500">...</p>
-<p className="text-grey-600">...</p>
-
-// ✅ ALWAYS use semantic body-text
-<p className="text-body-text-lighter">...</p>
-
 // ❌ NEVER use arbitrary hex colors
 <div className="bg-[#f5f5f5]">...</div>
+<div className="text-[#3B82F6]">...</div>
 
 // ✅ ALWAYS use palette colors
 <div className="bg-pavlov-bg">...</div>
+<div className="text-blue-600">...</div>
 
+// ❌ NEVER import external color libraries or add bright colors
+// The palette is intentionally muted and warm
+
+// ❌ NEVER use numbered gray scales for body text
+<p className="text-gray-500">...</p>
+
+// ✅ ALWAYS use semantic body-text for text content
+<p className="text-body-text-lighter">...</p>
+```
+
+**Borders:**
+```jsx
 // ❌ NEVER use dark borders on light cards
 <div className="bg-white border border-gray-400">...</div>
 
 // ✅ Use subtle borders
 <div className="bg-white border border-rule-color">...</div>
 ```
+
+**What "muted" means:**
+- Our `red-500` is terracotta (#C45D4A), not bright red (#EF4444)
+- Our `blue-500` is steel blue (#5A7A99), not electric blue (#3B82F6)
+- Our `green-500` is sage (#5A8A62), not neon green (#22C55E)
+
+The numbered scales (50-900) are available but all point to our muted palette.
 
 ---
 
