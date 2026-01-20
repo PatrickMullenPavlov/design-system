@@ -1,3 +1,4 @@
+@import "./fonts.css";
 @import "./buttons.css";
 
 @tailwind base;
@@ -10,13 +11,9 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family:
-    Helvetica Neue,
-    Inter,
+    'Circular',
     -apple-system,
-    Roboto,
     BlinkMacSystemFont,
-    SF Pro,
-    Segoe UI,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -2,6 +2,44 @@
 
 This document provides prescriptive rules for maintaining consistent styling across all Pavlov projects. Follow these patterns exactly.
 
+---
+
+## Brand Fundamentals
+
+### Typeface: Circular
+
+**Circular is the Pavlov brand typeface. It must be used for ALL text across all projects.**
+
+The font is included in `styles/fonts/Circular/` and loaded via `styles/fonts.css`.
+
+**Font Weights:**
+| Weight | Name | Tailwind Class | Usage |
+|--------|------|----------------|-------|
+| 200 | Thin | `font-thin` | Decorative, large display text only |
+| 300 | Light | `font-light` | Body text, descriptions, secondary content |
+| 400 | Book | `font-regular` or `font-normal` | Default body text, form inputs |
+| 500 | Bold | `font-semibold` or `font-medium` | Labels, emphasis, subheadings |
+| 600 | Black | `font-bold` | Headings, strong emphasis, CTAs |
+
+**Usage Rules:**
+- Headlines: `font-bold` (600) with tight tracking (`tracking-tight` or `tracking-tighter`)
+- Body text: `font-light` (300) or `font-regular` (400)
+- Labels & UI: `font-medium` (500)
+- Never use weights outside this range (no 100, 700, 800, 900)
+- Never use a different font family
+
+**Accessing the Font:**
+```jsx
+// Via Tailwind (recommended)
+<h1 className="font-brand font-bold">Heading</h1>
+<p className="font-brand font-light">Body text</p>
+
+// The font is also set as the default, so this works too:
+<p className="font-light">Body text</p>
+```
+
+---
+
 ## Component Categories
 
 ### When to Use What

@@ -10,6 +10,12 @@ module.exports = {
 
   theme: {
     extend: {
+      // Brand typeface
+      fontFamily: {
+        brand: ["'Circular'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        sans: ["'Circular'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+      },
+
       // Typography from marketing
       fontWeight: {
         thin: "200",
