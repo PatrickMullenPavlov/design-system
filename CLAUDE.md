@@ -315,6 +315,15 @@ The Trig palette uses **muted, warm tones** exclusively. All colors have:
 
 Standard Tailwind colors like `blue-500`, `red-400`, `green-600` now point to our muted variants, not the default bright colors.
 
+**This is wrong:**
+```
+❌ Bright blue callouts/alerts (default Tailwind blue-900 background)
+❌ Saturated, electric blue UI elements
+❌ Any color that looks like default Tailwind
+```
+
+If you see bright, saturated blues like this in the UI, it means the design system's `tailwind.config.js` isn't being used — fix the config, don't just add more bright colors.
+
 #### Color Philosophy
 
 | Instead of... | We use... |
