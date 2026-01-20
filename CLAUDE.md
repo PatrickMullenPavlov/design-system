@@ -40,6 +40,121 @@ The font is included in `styles/fonts/Circular/` and loaded via `styles/fonts.cs
 
 ---
 
+### Color System
+
+The Pavlov color palette is intentionally limited. Use ONLY these colors.
+
+#### Text Colors (in order of usage)
+
+| Class | Usage | When to Use |
+|-------|-------|-------------|
+| `text-body-text` | Primary text | All main content, headings, labels |
+| `text-body-text-lighter` | Secondary text | Descriptions, helper text, metadata |
+| `text-body-text-lightest` | Muted text | Disabled states, timestamps, tertiary info |
+| `text-body-text-light` | Subtle emphasis | Subheadings, captions |
+| `text-white` | Inverted text | On dark backgrounds only |
+
+**On Dark Backgrounds:**
+| Class | Usage |
+|-------|-------|
+| `text-light-body-text` | Primary text on dark |
+| `text-light-body-text-light` | Secondary text on dark |
+| `text-light-body-text-lighter` | Muted text on dark |
+
+**Never use:** `text-gray-*` or `text-grey-*` numbered scales for body text. Use the semantic `text-body-text` variants.
+
+---
+
+#### Background Colors
+
+| Class | Usage | Context |
+|-------|-------|---------|
+| `bg-pavlov-bg` | Page background | The default app background (#f7f7f7) |
+| `bg-pavlov-bg-lighter` | Card/panel background | Containers, sidebars, elevated surfaces |
+| `bg-white` | Input background | Form fields, modals, prominent cards |
+| `bg-pavlov-bg-light` | Subtle highlight | Selected states, subtle differentiation |
+| `bg-pavlov-bg-dark` | Divider/separator | Very subtle visual breaks |
+
+**Hierarchy (light to dark):**
+```
+bg-white → bg-pavlov-bg-lightest → bg-pavlov-bg-lighter → bg-pavlov-bg-light → bg-pavlov-bg → bg-pavlov-bg-dark → bg-pavlov-bg-darker
+```
+
+**Rules:**
+- Page wrapper: Always `bg-pavlov-bg`
+- Cards & containers: `bg-pavlov-bg-lighter` or `bg-white`
+- Inputs & form fields: `bg-white`
+- Disabled inputs: `bg-gray-50`
+- Never use dark backgrounds (`bg-pavlov-bg-darkest`, `bg-gray-900`) except for specific dark-mode sections
+
+---
+
+#### Border Colors
+
+| Class | Usage |
+|-------|-------|
+| `border-rule-color` | Default borders | Cards, inputs, dividers |
+| `border-white` | Container accents | Subtle container definition |
+| `border-grey-200` | Alternative subtle | When rule-color is too light |
+
+**Rules:**
+- Default border: Always `border-rule-color`
+- Containers: `border-white` or `border-rule-color`
+- Never use dark borders on light containers
+- Error state: `border-red`
+- Focus state: `border-blue-800`
+
+---
+
+#### Hover States
+
+| Class | Context |
+|-------|---------|
+| `hover:bg-blue-10` | Interactive elements (links, buttons) |
+| `hover:bg-pavlov-bg` | Cards that are clickable |
+| `hover:bg-pavlov-bg-light` | Subtle hover on light backgrounds |
+| `hover:bg-grey-200` | List items, table rows |
+| `hover:bg-red-10` | Destructive actions |
+| `hover:bg-green-10` | Confirm actions |
+
+---
+
+#### Status Colors
+
+| Status | Background | Text |
+|--------|------------|------|
+| Info | `bg-blue-10` | `text-blue-800` |
+| Success | `bg-green-10` | `text-green` |
+| Warning | `bg-orange-10` | `text-orange` |
+| Error | `bg-red-10` | `text-red` |
+
+---
+
+#### Forbidden Patterns
+
+```jsx
+// ❌ NEVER use numbered gray scales for text
+<p className="text-gray-500">...</p>
+<p className="text-grey-600">...</p>
+
+// ✅ ALWAYS use semantic body-text
+<p className="text-body-text-lighter">...</p>
+
+// ❌ NEVER use arbitrary hex colors
+<div className="bg-[#f5f5f5]">...</div>
+
+// ✅ ALWAYS use palette colors
+<div className="bg-pavlov-bg">...</div>
+
+// ❌ NEVER use dark borders on light cards
+<div className="bg-white border border-gray-400">...</div>
+
+// ✅ Use subtle borders
+<div className="bg-white border border-rule-color">...</div>
+```
+
+---
+
 ## Component Categories
 
 ### When to Use What
