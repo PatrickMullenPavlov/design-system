@@ -33,26 +33,23 @@ Most AI branding falls into two traps:
 
 ## Visual System: The Cube
 
-The **isometric cube** is the atomic unit of Trig's visual language.
+The **isometric cube** appears in the Trig logo and is available as a visual element — but it's **not mandatory** and shouldn't be overused.
 
-### Cube Characteristics
+### When to Use Cubes
+- Logo and brand marks
+- Hero illustrations where geometric precision fits
+- Diagrams explaining structured concepts
+
+### When NOT to Use Cubes
+- Don't force cubes into every design
+- Don't use them just because they're "on brand"
+- Product UI doesn't need cube motifs
+
+### If You Do Use Cubes
 - Line-drawn (not filled, not 3D-rendered)
 - Isometric perspective (consistent, mathematical)
-- Combinable (cubes join to form more complex shapes)
-
-### Cube Applications
-
-**Icons:** Built from cube combinations. Each icon should feel like it could be disassembled into its constituent geometric parts. Use hatching and line patterns to differentiate surfaces.
-
-**Patterns:** Cube wireframes can extend into background patterns — connected grids, tessellations, or floating arrangements. These should feel architectural and structured, never random or scattered.
-
-**Diagrams:** When explaining concepts or flows, use the same isometric, geometric language. Prefer architectural/diagrammatic clarity over abstract symbolism.
-
-### Cube Variants
-- Pure wireframe
-- Filled with hatching or texture patterns
-- Combined into icons representing product concepts
-- Arranged into larger compositional patterns
+- Architectural and structured, never random or scattered
+- Can use hatching patterns to differentiate surfaces
 
 ---
 
