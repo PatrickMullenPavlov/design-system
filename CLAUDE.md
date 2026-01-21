@@ -594,6 +594,7 @@ The numbered scales (50-900) are available but all point to our muted palette.
 
 | Component | Purpose | Location |
 |-----------|---------|----------|
+| `Navigation` | Responsive header nav with dropdowns and mobile menu | `components/layout/` |
 | `Container` | Responsive content wrapper with max-width | `components/layout/` |
 | `Section` | Content section with padding/background options | `components/layout/` |
 | `SectionHeader` | Headings with optional tag and description | `components/layout/` |
@@ -1012,6 +1013,51 @@ const [isOpen, setIsOpen] = useState(false);
 
 ## Layout Patterns
 
+### Navigation
+
+```jsx
+import Navigation from "./components/layout/Navigation";
+import { TrigLogoBlack } from "./components/brand";
+
+const navigation = [
+  { title: "Home", url: "/" },
+  {
+    title: "Products",
+    pages: [
+      { title: "Onboarding", url: "/products/onboarding", description: "Get users started" },
+      { title: "Retention", url: "/products/retention", description: "Keep users engaged" },
+      { title: "Expansion", url: "/products/expansion", description: "Grow accounts" },
+    ]
+  },
+  { title: "Pricing", url: "/pricing" },
+  { title: "Blog", url: "/blog" },
+];
+
+<Navigation
+  navigation={navigation}
+  currentPath="/products/onboarding"
+  logo={<TrigLogoBlack className="h-8" />}
+  logoHref="/"
+  actions={
+    <>
+      <SecondaryButton label="Sign In" />
+      <PrimaryButton label="Book a Demo" />
+    </>
+  }
+  onNavigate={({ title, url }) => console.log(`Navigated to ${title}`)}
+  LinkComponent={Link} // Optional: pass Next.js Link for client-side routing
+/>
+```
+
+**Props:**
+- `navigation` - Array of nav items (with optional nested `pages` for dropdowns)
+- `currentPath` - Current URL for active state highlighting
+- `logo` - Logo component to display
+- `logoHref` - Where logo links to (default: "/")
+- `actions` - Right-side action buttons (sign in, CTA, etc.)
+- `onNavigate` - Callback when user navigates
+- `LinkComponent` - Custom link component (e.g., Next.js `Link`)
+
 ### Page Structure
 
 ```jsx
@@ -1222,6 +1268,7 @@ import { cx } from "../utils/cx";
 ## Component Index
 
 ### Layout (Marketing)
+- `Navigation` - Responsive header nav with dropdowns
 - `SectionHeader` - Headings with optional tag and description
 - `Tag` - Small uppercase labels
 - `Container` - Page-level wrapper
