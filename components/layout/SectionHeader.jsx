@@ -26,36 +26,37 @@ export default function SectionHeader({
   style,
 }) {
   // Define styles based on size prop
+  // All values use the locked typography scale - no arbitrary values
   const sizeStyles = {
     xs: {
       tag: "mt-2",
-      title: "text-sm font-medium",
+      title: "text-sm font-medium tracking-tight",
       description: "text-sm font-light text-body-text-lighter",
     },
     sm: {
       tag: "mt-2",
       title: "text-base font-semibold tracking-tight",
-      description: "text-[15px] leading-6 text-body-text-lighter",
+      description: "text-sm leading-normal text-body-text-lighter",
     },
     md: {
       tag: "mt-2",
-      title: "text-lg lg:text-[24px] pb-2 tracking-tight",
+      title: "text-lg lg:text-2xl pb-2 font-semibold tracking-tight",
       description: "text-sm lg:text-base font-light",
     },
     lg: {
       tag: "mt-2",
       title: "text-2xl lg:text-4xl pb-4 font-bold tracking-tight",
-      description: "text-md lg:text-lg pb-4 font-light",
+      description: "text-base lg:text-lg pb-4 font-light",
     },
     lgLight: {
       tag: "mt-2",
-      title: "text-2xl lg:text-4xl pb-2 tracking-tight",
-      description: "text-md lg:text-lg pb-4 sm:pb-2 font-light",
+      title: "text-2xl lg:text-4xl pb-2 font-semibold tracking-tight",
+      description: "text-base lg:text-lg pb-4 sm:pb-2 font-light",
     },
     xl: {
       tag: "mt-2",
       title: "text-4xl lg:text-6xl pb-6 font-bold tracking-tighter",
-      description: "text-md lg:text-lg pb-6 font-light",
+      description: "text-base lg:text-lg pb-6 font-light",
     },
   };
 

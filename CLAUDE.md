@@ -792,12 +792,42 @@ Available utilities: `bg-gradient-45`, `bg-gradient-90`, `bg-gradient-135`, `bg-
 
 **Typography is locked down. Use only these values. No arbitrary sizes, weights, or spacing.**
 
-### Headings
+### SectionHeader (Required for All Headings)
 
-Always use `SectionHeader` for page/section headings. Never create custom heading styles.
+**Always use `SectionHeader` for page and section headings. Never create custom heading styles.**
 
 ```jsx
-// Page title (hero)
+import SectionHeader from "./components/layout/SectionHeader";
+```
+
+#### Size Variants
+
+| Size | Title | Description | Use Case |
+|------|-------|-------------|----------|
+| `xs` | text-sm / medium | text-sm / light | Inline labels, minor headings |
+| `sm` | text-base / semibold | text-sm / light | Card headers, small sections |
+| `md` | text-lg→2xl / semibold | text-sm→base / light | Standard sections (default) |
+| `lg` | text-2xl→4xl / bold | text-base→lg / light | Major sections |
+| `lgLight` | text-2xl→4xl / semibold | text-base→lg / light | Major sections (lighter weight) |
+| `xl` | text-4xl→6xl / bold | text-base→lg / light | Hero sections, page titles |
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | required | Main heading text |
+| `description` | string | - | Optional subheading text |
+| `size` | `"xs"` \| `"sm"` \| `"md"` \| `"lg"` \| `"lgLight"` \| `"xl"` | `"md"` | Size variant |
+| `alignment` | `"center"` \| `"left"` | `"center"` | Text alignment |
+| `tag` | string | - | Optional tag label above title |
+| `tagColor` | `"default"` \| `"white"` | `"default"` | Tag color variant |
+| `url` | string | - | Optional link URL (used with tag) |
+| `style` | `"default"` \| `"light"` | `"default"` | Use `"light"` on dark backgrounds |
+
+#### Examples
+
+```jsx
+// Hero (xl) - Page title, centered
 <SectionHeader
   size="xl"
   title="Welcome to Trig"
@@ -805,7 +835,7 @@ Always use `SectionHeader` for page/section headings. Never create custom headin
   alignment="center"
 />
 
-// Section heading
+// Major section (lg) - With tag
 <SectionHeader
   size="lg"
   tag="Features"
@@ -814,20 +844,47 @@ Always use `SectionHeader` for page/section headings. Never create custom headin
   alignment="left"
 />
 
-// Subsection heading
+// Standard section (md) - Default size
 <SectionHeader
   size="md"
   title="Campaign Analytics"
+  description="Track performance in real-time"
   alignment="left"
 />
 
-// Small heading
+// Card header (sm)
 <SectionHeader
   size="sm"
   title="Recent Activity"
   alignment="left"
 />
+
+// Minor heading (xs)
+<SectionHeader
+  size="xs"
+  title="Settings"
+  alignment="left"
+/>
+
+// On dark background
+<div className="bg-trig-bg-darkest p-8">
+  <SectionHeader
+    size="lg"
+    title="Dark Section"
+    description="This text is light colored"
+    style="light"
+  />
+</div>
 ```
+
+#### When to Use Each Size
+
+- **xl**: Hero sections, landing page titles, major page headers
+- **lg**: Primary content sections, feature blocks, major divisions
+- **lgLight**: Same as lg but lighter weight (less aggressive)
+- **md**: Standard sections, card groups, content blocks (default)
+- **sm**: Card headers, sidebar sections, compact areas
+- **xs**: Inline headings, labels, very minor sections
 
 ### Font Sizes (Locked Scale)
 
