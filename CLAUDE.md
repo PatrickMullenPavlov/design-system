@@ -692,8 +692,28 @@ The numbered scales (50-900) are available but all point to our muted palette.
 | `PrimaryButton` | Main action button | `components/buttons/` |
 | `SecondaryButton` | Secondary action button | `components/buttons/` |
 | `IconButton` | Icon-only button | `components/buttons/` |
+| `CTAButton` | Marketing CTA with optional icon | `components/buttons/` |
 
 **Principle:** Layout components use only neutral colors (`bg-trig-bg`, `bg-white`, `border-rule-color`). Never use the communications palette or grain textures in layout.
+
+### Marketing Components
+
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| `HeroTextLeft` | Hero section with text left, media right | `components/marketing/` |
+| `Quote` | Large testimonial quote display | `components/marketing/` |
+| `Testimonial` | Individual testimonial card | `components/marketing/` |
+| `TestimonialGrid` | Grid of testimonial cards | `components/marketing/` |
+| `FeatureSection` | Feature with text and image | `components/marketing/` |
+| `FeatureWithBenefits` | Feature with benefits list | `components/marketing/` |
+| `TabbedFeatures` | Tabbed content switcher | `components/marketing/` |
+
+### Typography Components
+
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| `portableTextComponents` | Rich text styling config | `components/typography/` |
+| `Prose` | Rich text wrapper | `components/typography/` |
 
 ---
 
@@ -1119,17 +1139,230 @@ Muted:            text-light-body-text-lighter
 //                  clipboard, trash, cog, bookmark, ellipsis, arrowRight
 ```
 
-### Marketing CTAs (CSS classes)
+### Marketing CTAs
 
-For marketing pages, you can also use these CSS classes directly:
+Use `CTAButton` for marketing page call-to-actions:
 
 ```jsx
-// Dark CTA
+import CTAButton from "./components/buttons/CTAButton";
+
+// Standard CTA
+<CTAButton label="Get Started" href="/signup" />
+
+// Book a Demo (auto-shows icon, opens in new tab)
+<CTAButton label="Book a Demo" href="/demo" />
+
+// Light variant (for dark backgrounds)
+<CTAButton label="Learn More" href="/about" variant="light" />
+
+// Small size
+<CTAButton label="See how" href="/features" size="sm" />
+
+// With custom icon
+<CTAButton
+  label="Download"
+  href="/download"
+  icon={<ArrowDownIcon className="w-4 h-4" />}
+  showIcon
+/>
+```
+
+**Props:**
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | string | required | Button text |
+| `href` | string | - | URL to navigate to |
+| `variant` | `"default"` \| `"light"` | `"default"` | Style variant |
+| `size` | `"sm"` \| `"md"` | `"md"` | Button size |
+| `showIcon` | boolean | auto | Show icon (auto for "Book a Demo") |
+| `openInNewTab` | boolean | auto | Open in new tab |
+
+**CSS class alternatives:**
+```jsx
+// Dark CTA (legacy)
 <button className="CTAButton">Get Started</button>
 
-// White CTA (for dark backgrounds)
+// White CTA (legacy)
 <button className="whiteCTAButton">Learn More</button>
 ```
+
+---
+
+## Rich Text Patterns
+
+### Using portableTextComponents
+
+For Sanity CMS or similar rich text content:
+
+```jsx
+import { PortableText } from "@portabletext/react";
+import { portableTextComponents } from "./components/typography/PortableTextComponents";
+
+<PortableText value={content} components={portableTextComponents} />
+```
+
+### Using the Prose Wrapper
+
+For general HTML or markdown content:
+
+```jsx
+import { Prose } from "./components/typography/PortableTextComponents";
+
+<Prose>
+  <h1>Article Title</h1>
+  <p>Body content with <strong>bold</strong> and <a href="#">links</a>.</p>
+  <ul>
+    <li>List item one</li>
+    <li>List item two</li>
+  </ul>
+</Prose>
+```
+
+### Rich Text Styles Reference
+
+All rich text uses the locked typography scale:
+
+| Element | Styles |
+|---------|--------|
+| `h1` | text-4xl, font-bold, tracking-tight |
+| `h2` | text-2xl, font-semibold, tracking-tight |
+| `h3` | text-xl, font-semibold, tracking-tight |
+| `h4` | text-lg, font-medium, tracking-tight |
+| `p` | font-light, leading-relaxed, text-body-text-light |
+| `strong` | font-semibold, text-body-text |
+| `a` | text-action-color, underline |
+| `ul/ol` | font-light, text-body-text-light |
+| `blockquote` | border-l-2, italic, text-body-text-lighter |
+
+---
+
+## Marketing Page Patterns
+
+### Hero Section
+
+```jsx
+import { HeroTextLeft } from "./components/marketing";
+
+<HeroTextLeft
+  tag="New Feature"
+  headline="Welcome to Trig"
+  subheadline="The customer engagement platform that drives results"
+  ctaText="Book a Demo"
+  ctaUrl="/demo"
+  heroImageUrl="/images/hero.png"
+/>
+
+// With video instead of image
+<HeroTextLeft
+  headline="See It In Action"
+  subheadline="Watch how teams use Trig"
+  heroVideoUrl="/videos/demo.mp4"
+  videoPosterUrl="/images/poster.jpg"
+/>
+```
+
+### Feature Sections
+
+```jsx
+import { FeatureSection, FeatureWithBenefits } from "./components/marketing";
+
+// Simple feature with image
+<FeatureSection
+  tag="Analytics"
+  title="Real-time Insights"
+  description="Track engagement as it happens with live dashboards."
+  imageUrl="/images/analytics.png"
+  imagePosition="right"
+  cta={{ text: "Learn more", url: "/features/analytics" }}
+/>
+
+// Feature with benefits list
+<FeatureWithBenefits
+  tag="Platform"
+  title="Everything You Need"
+  description="A complete toolkit for customer engagement."
+  imageUrl="/images/platform.png"
+  benefits={[
+    { title: "Onboarding", description: "Get users started fast", icon: "/icons/onboard.svg" },
+    { title: "Retention", description: "Keep users engaged", icon: "/icons/retain.svg" },
+    { title: "Expansion", description: "Grow customer value", icon: "/icons/expand.svg" },
+  ]}
+  cta={{ text: "See all features", url: "/features" }}
+/>
+```
+
+### Tabbed Features
+
+```jsx
+import { TabbedFeatures } from "./components/marketing";
+
+<TabbedFeatures
+  tag="Solutions"
+  title="Choose Your Path"
+  description="Multiple ways to engage customers"
+  tabs={[
+    {
+      title: "Onboarding",
+      contentTitle: "User Onboarding",
+      description: "Guide new users to success with personalized journeys.",
+      imageUrl: "/images/onboarding.png",
+      href: "/solutions/onboarding",
+    },
+    {
+      title: "Retention",
+      contentTitle: "Customer Retention",
+      description: "Keep users engaged with timely, relevant touchpoints.",
+      imageUrl: "/images/retention.png",
+      href: "/solutions/retention",
+    },
+  ]}
+  cta={{ text: "View all solutions", url: "/solutions" }}
+/>
+```
+
+### Testimonials
+
+```jsx
+import { Quote, Testimonial, TestimonialGrid } from "./components/marketing";
+
+// Large featured quote
+<Quote
+  quote="Trig transformed how we engage with customers."
+  author="Jane Smith"
+  authorTitle="VP of Marketing, Acme Inc"
+  authorImage="/images/jane.jpg"
+  companyLogo="/logos/acme.svg"
+  href="/casestudies/acme"
+/>
+
+// Single testimonial card
+<Testimonial
+  quote="Our conversion rate increased by 40% in the first month."
+  author="John Doe"
+  authorTitle="CEO, StartupCo"
+  authorImage="/images/john.jpg"
+  companyLogo="/logos/startup.svg"
+  companyImage="/images/startup-team.jpg"
+  stat={{ value: "40%", label: "Conversion Rate", description: "Increase in 30 days" }}
+  href="/casestudies/startup"
+/>
+
+// Grid of testimonials
+<TestimonialGrid
+  columns={2}
+  testimonials={[
+    { quote: "...", author: "...", ... },
+    { quote: "...", author: "...", ... },
+  ]}
+/>
+```
+
+### Key Marketing Component Rules
+
+1. **Images on flash backgrounds** — All feature images, illustrations, and screenshots use `.flash`
+2. **Use SectionHeader** — Never create custom headings in marketing components
+3. **CTAButton for actions** — Don't create custom CTA styles
+4. **Locked typography** — All text uses the scale, no arbitrary sizes
 
 ---
 
