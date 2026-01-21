@@ -586,21 +586,138 @@ The numbered scales (50-900) are available but all point to our muted palette.
 
 ---
 
-## Component Categories
+## Layout Patterns
 
-### When to Use What
+**Layout components are structural and functional. They organize content but don't express brand personality. Use only neutral colors.**
 
-**Marketing/Layout Components** (from `components/layout/`):
-- Landing pages and informational sections
-- Page structure and content hierarchy
-- Headings and body content
-- Section organization
+### Page Structure
 
-**Product/Interactive Components** (from `components/forms/`, `components/buttons/`, `components/feedback/`):
-- Forms and user input
-- Interactive elements and CTAs
-- User feedback (alerts, modals, tooltips)
-- Data display cards
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| `Container` | Responsive content wrapper with max-width | `components/layout/` |
+| `Section` | Content section with padding/background options | `components/layout/` |
+| `SectionHeader` | Headings with optional tag and description | `components/layout/` |
+| `Card` | Content container with optional click behavior | `components/` |
+
+### Form Components
+
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| `Input` | Base input element | `components/forms/` |
+| `TextInput` | Labeled text input with description | `components/forms/` |
+| `TextArea` | Multi-line text input | `components/forms/` |
+| `SelectInput` | Dropdown select with option groups | `components/forms/` |
+| `SearchInput` | Search field with icon | `components/forms/` |
+
+### Feedback Components
+
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| `Alert` | Status messages (info, success, warning, error) | `components/feedback/` |
+| `Modal` | Dialog overlay | `components/feedback/` |
+| `Tooltip` | Hover hints | `components/feedback/` |
+| `Toggle` | On/off switch | `components/` |
+
+### Button Components
+
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| `PrimaryButton` | Main action button | `components/buttons/` |
+| `SecondaryButton` | Secondary action button | `components/buttons/` |
+| `IconButton` | Icon-only button | `components/buttons/` |
+
+**Principle:** Layout components use only neutral colors (`bg-trig-bg`, `bg-white`, `border-rule-color`). Never use the communications palette or grain textures in layout.
+
+---
+
+## Brand Assets
+
+**Brand components are expressive and distinctive. They appear at key moments — hero sections, diagrams, marketing materials. Use sparingly.**
+
+### Available Brand Components
+
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| `TrigLogo` | Brand logo (black/white variants) | `components/brand/` |
+| `IsometricCube` | Cube illustration (wireframe/filled/hatched) | `components/brand/` |
+| `PeriodicElement` | Framework device for concepts | `components/brand/` |
+| `PeriodicSequence` | Compose element sequences with arrows | `components/brand/` |
+
+### Isometric Cube Usage
+
+```jsx
+import { IsometricCube } from "./components/brand";
+
+// Wireframe (default)
+<IsometricCube size="md" />
+
+// Filled with opacity
+<IsometricCube size="lg" variant="filled" fillColor="currentColor" />
+
+// Hatched pattern
+<IsometricCube size="md" variant="hatched" />
+```
+
+**When to use:** Logo marks, hero illustrations, diagram nodes.
+**When NOT to use:** Decorative scatter, product UI, every page.
+
+### Periodic Table Device
+
+```jsx
+import { PeriodicSequence } from "./components/brand";
+
+<PeriodicSequence
+  elements={[
+    { symbol: "Id", number: "01", label: "Identify" },
+    { symbol: "Ac", number: "02", label: "Act" },
+    { symbol: "Ms", number: "03", label: "Measure" },
+  ]}
+  size="md"
+/>
+```
+
+Use for conceptual frameworks and step-by-step flows.
+
+### Angular Gradients
+
+**Angular gradients only. NEVER radial.**
+
+Trig's visual language is precise and geometric. Radial gradients feel organic and amorphous — the opposite of our brand.
+
+```jsx
+// ✅ Angular gradients (with comms palette + grain)
+<div className="bg-gradient-45 from-comms-magenta to-comms-cyan grain">
+  Marketing hero content
+</div>
+
+// ❌ NEVER radial gradients
+<div className="bg-radial-gradient ...">  // WRONG
+```
+
+Available utilities: `bg-gradient-45`, `bg-gradient-90`, `bg-gradient-135`, `bg-gradient-180`, `bg-gradient-225`, `bg-gradient-270`, `bg-gradient-315`
+
+### Data Visualization Guidelines
+
+**Preferred chart types:**
+- Heat maps
+- Bar charts (squared ends, not rounded)
+- Stacked area charts (hard edges)
+- Tables with inline bars
+- Sparklines
+
+**Avoid:**
+- Bubble charts
+- Scatter plots
+- Pie/donut charts
+- Curved/smooth lines
+
+**Color rules for data viz:**
+- Use semantic colors from the palette
+- Single-hue scales work best (e.g., `blue-100` to `blue-800`)
+- Never use communications palette in product data viz
+- Ensure sufficient contrast between adjacent values
+
+**Principle:** Brand assets can use the full palette including communications colors, but comms palette must always be paired with grain texture and angular shapes.
 
 ---
 

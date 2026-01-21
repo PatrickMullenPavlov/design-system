@@ -425,6 +425,17 @@ module.exports = {
       },
 
       // Box shadows from product
+      // Angular gradients - NEVER use radial gradients
+      backgroundImage: {
+        "gradient-45": "linear-gradient(45deg, var(--tw-gradient-stops))",
+        "gradient-90": "linear-gradient(90deg, var(--tw-gradient-stops))",
+        "gradient-135": "linear-gradient(135deg, var(--tw-gradient-stops))",
+        "gradient-180": "linear-gradient(180deg, var(--tw-gradient-stops))",
+        "gradient-225": "linear-gradient(225deg, var(--tw-gradient-stops))",
+        "gradient-270": "linear-gradient(270deg, var(--tw-gradient-stops))",
+        "gradient-315": "linear-gradient(315deg, var(--tw-gradient-stops))",
+      },
+
       boxShadow: {
         "ai-action":
           "-2px -2px 4px rgba(167, 51, 255, 0.1), 2px 2px 8px rgba(51, 153, 255, 0.1)",
