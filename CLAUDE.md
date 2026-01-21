@@ -70,6 +70,120 @@ Ask yourself:
 
 ---
 
+## Design System Review Command
+
+**When the user asks to "review against the design system" or "check my work", generate a detailed review checklist based on the code they've written.**
+
+### How to Use
+
+User can say:
+- "Review this against the design system"
+- "Check my work against Trig guidelines"
+- "Design system audit"
+- "Pre-ship checklist"
+
+### Review Checklist Template
+
+When asked to review, analyze the code and check each item. Mark as ✅ (pass), ❌ (fail), or ⚠️ (warning/needs attention):
+
+```
+## Design System Review
+
+### Typography
+[ ] Font family: All text uses Circular (font-brand/font-sans)
+[ ] Font sizes: Only using locked scale (text-xs through text-8xl)
+[ ] Font weights: Only light/normal/medium/semibold/bold
+[ ] Letter spacing: Only tighter/tight/normal/wide
+[ ] Line heights: Only none/tight/snug/normal/relaxed
+[ ] No arbitrary values: No text-[14px], font-[450], etc.
+[ ] Headings use SectionHeader component (not custom h1/h2/h3)
+[ ] Body text uses text-body-text variants (not text-gray-*)
+
+### Colors
+[ ] Using muted palette: No bright/saturated Tailwind defaults
+[ ] Text colors: Using text-body-text-* variants
+[ ] Backgrounds: Using bg-trig-bg-* variants
+[ ] Borders: Using border-rule-color
+[ ] No arbitrary hex: No bg-[#fff] or text-[#333]
+[ ] Status colors: Using semantic variants (red-10, green-10, etc.)
+
+### Containers & Cards
+[ ] No outline-only containers: All have background fills
+[ ] Using bg-trig-bg-lighter, bg-white, or flash pattern
+[ ] No border-only boxes: No border without background
+[ ] No dashed borders on content areas
+
+### Images & Illustrations
+[ ] Illustrations on flash backgrounds
+[ ] Screenshots on flash backgrounds
+[ ] Icons on flash backgrounds (when standalone)
+[ ] Exception: Hero images can be full-bleed
+
+### Spacing
+[ ] Using locked scale: 0,1,2,3,4,6,8,12,16,20,24
+[ ] Half-steps used sparingly: 0.5, 1.5, 2.5
+[ ] No arbitrary spacing: No p-[13px], m-[7px]
+[ ] Consistent patterns: Cards p-4/p-6, sections py-12/py-16
+
+### Components
+[ ] Using SectionHeader for headings
+[ ] Using CTAButton for marketing CTAs
+[ ] Using PrimaryButton/SecondaryButton for actions
+[ ] Using TextInput/SelectInput for forms
+[ ] Using Alert for feedback messages
+[ ] Using Card component (not custom containers)
+
+### Accessibility
+[ ] Buttons have visible focus states
+[ ] Images have alt text
+[ ] Form inputs have labels
+[ ] Sufficient color contrast
+[ ] No skipped heading levels
+
+### Code Quality
+[ ] No inline styles for colors/spacing/typography
+[ ] Using cx() utility for conditional classes
+[ ] Components are composable and reusable
+[ ] No duplicate style definitions
+```
+
+### Review Output Format
+
+When reviewing, provide:
+
+1. **Summary**: Overall pass/fail with key issues
+2. **Detailed Findings**: Each category with specific line numbers
+3. **Fixes Required**: Concrete code changes needed
+4. **Recommendations**: Optional improvements
+
+Example output:
+```
+## Design System Review: ComponentName.jsx
+
+### Summary
+⚠️ 3 issues found, 2 critical
+
+### Critical Issues
+❌ Line 24: Using text-[15px] - use text-base instead
+❌ Line 38: Outline-only container - add bg-trig-bg-lighter
+
+### Warnings
+⚠️ Line 12: Image without flash background - add flash class
+
+### Fixes Required
+1. Line 24: Change `text-[15px]` to `text-base`
+2. Line 38: Change `border border-gray-200` to `bg-trig-bg-lighter`
+3. Line 12: Wrap image in `<div className="flash">`
+
+### Passed
+✅ Typography font family
+✅ Color palette
+✅ Spacing scale
+✅ Component usage
+```
+
+---
+
 ## Brand Philosophy
 
 **The name "Trig" combines trigonometry (precision, geometry, mathematical foundations) and triggers (product actions that drive engagement). This duality — precision meets action — runs through everything.**
