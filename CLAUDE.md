@@ -4,6 +4,72 @@ This document provides prescriptive rules for maintaining consistent styling acr
 
 ---
 
+## Pre-Flight Checklist
+
+**Before submitting any UI work, verify ALL of the following:**
+
+### 1. Typography: Circular Only
+- [ ] All text uses `font-brand` or `font-sans` (both map to Circular)
+- [ ] No system fonts, no Arial, no Helvetica, no other typefaces
+- [ ] Font weights are from the locked scale (light/normal/medium/semibold/bold)
+
+### 2. Containers: No Outline-Only Borders
+- [ ] Cards and containers use background fills (`bg-trig-bg-lighter`, `bg-white`)
+- [ ] Or use the `.flash` pattern for visual interest
+- [ ] **NO** empty boxes with just `border` and no background
+- [ ] **NO** dashed borders around content areas
+
+```jsx
+// ❌ WRONG - outline only
+<div className="border border-gray-200 rounded-lg p-4">...</div>
+
+// ✅ CORRECT - background fill
+<div className="bg-trig-bg-lighter rounded-lg p-4">...</div>
+
+// ✅ CORRECT - flash pattern
+<div className="flash rounded-lg p-4">...</div>
+```
+
+### 3. Colors: Subtle Grays Only
+- [ ] Using `text-body-text` variants for text (not `text-gray-*`)
+- [ ] Using `bg-trig-bg` variants for backgrounds (not `bg-gray-*`)
+- [ ] Using `border-rule-color` for borders (not `border-gray-*`)
+- [ ] No bright/saturated colors from default Tailwind
+- [ ] All colors are from the muted, warm palette
+
+### 4. Images & Illustrations: Flash Backgrounds
+- [ ] Illustrations sit on `.flash` background (diagonal stripe pattern)
+- [ ] Icons and graphics sit on `.flash` background
+- [ ] Product screenshots sit on `.flash` background
+- [ ] **Exception:** Hero images can be full-bleed without flash
+
+```jsx
+// ❌ WRONG - illustration on plain background
+<div className="bg-white p-8">
+  <img src="/illustration.svg" />
+</div>
+
+// ✅ CORRECT - illustration on flash background
+<div className="flash p-8">
+  <img src="/illustration.svg" />
+</div>
+
+// ✅ EXCEPTION - hero images can be full-bleed
+<div className="relative h-[500px]">
+  <img src="/hero.jpg" className="object-cover w-full h-full" />
+</div>
+```
+
+### Quick Visual Test
+
+Ask yourself:
+1. **Does it feel warm?** — If it feels cold or clinical, check your grays
+2. **Are there empty outlined boxes?** — If yes, add backgrounds or flash
+3. **Is the typography consistent?** — If anything looks "off", check the font family
+4. **Do images float on nothing?** — If yes, add flash backgrounds
+
+---
+
 ## Brand Philosophy
 
 **The name "Trig" combines trigonometry (precision, geometry, mathematical foundations) and triggers (product actions that drive engagement). This duality — precision meets action — runs through everything.**
