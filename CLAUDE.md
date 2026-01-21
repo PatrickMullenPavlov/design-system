@@ -724,6 +724,8 @@ Available utilities: `bg-gradient-45`, `bg-gradient-90`, `bg-gradient-135`, `bg-
 
 ## Typography Patterns
 
+**Typography is locked down. Use only these values. No arbitrary sizes, weights, or spacing.**
+
 ### Headings
 
 Always use `SectionHeader` for page/section headings. Never create custom heading styles.
@@ -761,9 +763,119 @@ Always use `SectionHeader` for page/section headings. Never create custom headin
 />
 ```
 
-### Body Text Classes
+### Font Sizes (Locked Scale)
 
-Use these exact Tailwind classes for body text:
+**Only these sizes are permitted. Never use arbitrary values like `text-[14px]`.**
+
+| Class | Size | Usage |
+|-------|------|-------|
+| `text-xs` | 12px | Labels, tags, micro-text, timestamps |
+| `text-sm` | 13px | Navigation, small UI text, captions |
+| `text-base` | 16px | Body copy (default) |
+| `text-lg` | 18px | Lead paragraphs, emphasized body |
+| `text-xl` | 20px | Card titles, small headings |
+| `text-2xl` | 24px | Section subheadings |
+| `text-3xl` | 30px | Section headings |
+| `text-4xl` | 36px | Page headings |
+| `text-5xl` | 48px | Hero headings |
+| `text-6xl` | 60px | Large display text |
+| `text-7xl` | 72px | Statistics, large numbers |
+| `text-8xl` | 96px | Hero statistics |
+
+**Forbidden:**
+```jsx
+// ❌ NEVER use arbitrary font sizes
+<p className="text-[14px]">...</p>
+<p className="text-[15px]">...</p>
+<h1 className="text-[120px]">...</h1>
+
+// ✅ Use the scale
+<p className="text-sm">...</p>
+<p className="text-base">...</p>
+<h1 className="text-7xl">...</h1>
+```
+
+### Font Weights (Locked Scale)
+
+**Only these weights are permitted.**
+
+| Class | Weight | Usage |
+|-------|--------|-------|
+| `font-light` | 300 | Body text, descriptions, secondary content |
+| `font-normal` | 400 | Default body text, form inputs |
+| `font-medium` | 500 | Labels, emphasis, UI controls |
+| `font-semibold` | 600 | Subheadings, navigation, buttons |
+| `font-bold` | 700 | Headings, strong emphasis, CTAs |
+
+**Forbidden:**
+- `font-thin` (200) — too light for readability
+- `font-extrabold` (800) — not in brand
+- `font-black` (900) — not in brand
+- Arbitrary weights like `font-[450]`
+
+**Common patterns:**
+```jsx
+// Headlines
+<h1 className="text-4xl font-bold tracking-tight">...</h1>
+
+// Body text
+<p className="text-base font-light">...</p>
+
+// Labels and UI
+<label className="text-sm font-medium">...</label>
+
+// Navigation
+<span className="text-sm font-semibold">...</span>
+```
+
+### Letter Spacing (Locked Scale)
+
+**Only these tracking values are permitted.**
+
+| Class | Usage |
+|-------|-------|
+| `tracking-tighter` | Large display headings (text-5xl+) |
+| `tracking-tight` | All headings (most common) |
+| `tracking-normal` | Body text (default, often omitted) |
+| `tracking-wide` | Navigation, labels, uppercase text |
+
+**Forbidden:**
+- `tracking-wider` — too spaced
+- `tracking-widest` — not in brand
+- Arbitrary values like `tracking-[0.05em]`
+
+**Patterns:**
+```jsx
+// Headings - always tight
+<h1 className="text-4xl font-bold tracking-tight">...</h1>
+<h2 className="text-2xl font-bold tracking-tight">...</h2>
+
+// Large display - tighter
+<span className="text-7xl font-bold tracking-tighter">42%</span>
+
+// Navigation and labels - wide
+<span className="text-xs font-medium tracking-wide uppercase">Features</span>
+```
+
+### Line Heights (Locked Scale)
+
+**Only these leading values are permitted.**
+
+| Class | Ratio | Usage |
+|-------|-------|-------|
+| `leading-none` | 1 | Large statistics, display numbers |
+| `leading-tight` | 1.25 | Headings |
+| `leading-snug` | 1.375 | Subheadings, cards |
+| `leading-normal` | 1.5 | Body text (default) |
+| `leading-relaxed` | 1.625 | Long-form content, articles |
+
+**Forbidden:**
+- Arbitrary values like `leading-[120px]`
+- `leading-loose` — too spaced for brand
+
+### Body Text Colors
+
+Use semantic color classes, never arbitrary hex values:
 
 ```
 Primary text:     text-body-text
@@ -777,17 +889,52 @@ Secondary:        text-light-body-text-light
 Muted:            text-light-body-text-lighter
 ```
 
-### Text Sizes
+**Forbidden:**
+```jsx
+// ❌ Never use gray scales for body text
+<p className="text-gray-600">...</p>
+<p className="text-slate-500">...</p>
 
+// ✅ Use semantic text colors
+<p className="text-body-text-lighter">...</p>
 ```
-Extra small:  text-xs (12px)
-Small:        text-sm (13px)
-Base:         text-base (16px)
-Large:        text-lg (18px)
-XL:           text-xl (20px)
-2XL:          text-2xl (24px)
-3XL:          text-3xl (30px)
-4XL:          text-4xl (36px)
+
+### Complete Typography Examples
+
+```jsx
+// Hero section
+<h1 className="text-5xl font-bold tracking-tighter text-body-text">
+  Welcome to Trig
+</h1>
+<p className="text-xl font-light text-body-text-light">
+  The customer engagement platform
+</p>
+
+// Card
+<h3 className="text-xl font-semibold tracking-tight text-body-text">
+  Card Title
+</h3>
+<p className="text-base font-light text-body-text-lighter">
+  Card description goes here.
+</p>
+
+// Navigation item
+<span className="text-sm font-semibold tracking-wide text-body-text">
+  Products
+</span>
+
+// Statistic
+<span className="text-7xl font-bold tracking-tighter leading-none text-body-text">
+  2.4M
+</span>
+<span className="text-sm font-medium tracking-wide uppercase text-body-text-lighter">
+  Active Users
+</span>
+
+// Form label
+<label className="text-sm font-medium text-body-text">
+  Email Address
+</label>
 ```
 
 ---
@@ -1110,52 +1257,154 @@ const navigation = [
 
 ## Spacing Conventions
 
-**CRITICAL: All padding and margin values must be EVEN numbers.**
+**Spacing is locked down. Use only the permitted scale values. No arbitrary spacing.**
 
-Never use odd pixel values: ~~9px~~, ~~11px~~, ~~13px~~, ~~15px~~, ~~17px~~
+### The Spacing Scale (Locked)
 
-Use Tailwind's spacing scale consistently (all values are even):
+**Core scale — use these for 95% of spacing needs:**
 
-```
-Padding/Margin:
-- Tight:    p-2 / m-2 (8px)
-- Default:  p-4 / m-4 (16px)
-- Relaxed:  p-6 / m-6 (24px)
-- Spacious: p-8 / m-8 (32px)
+| Class | Pixels | Usage |
+|-------|--------|-------|
+| `0` | 0px | Reset, flush alignment |
+| `1` | 4px | Minimal: icon gaps, tight inline spacing |
+| `2` | 8px | Tight: button padding, small gaps |
+| `3` | 12px | Small: form field padding, list gaps |
+| `4` | 16px | Default: card padding, standard gaps |
+| `6` | 24px | Relaxed: section padding, comfortable gaps |
+| `8` | 32px | Spacious: large cards, section breaks |
+| `12` | 48px | Section: vertical section spacing |
+| `16` | 64px | Large section: page-level spacing |
+| `20` | 80px | Hero: major section breaks |
+| `24` | 96px | Maximum: hero sections only |
 
-Gaps:
-- Elements: gap-2 (8px)
-- Sections: gap-4 (16px)
-- Major:    gap-8 (32px)
+**Half-step scale — permitted but use sparingly:**
 
-Vertical spacing between form fields: pb-4
-Vertical spacing between sections: py-8 or py-12
-```
+| Class | Pixels | Usage |
+|-------|--------|-------|
+| `0.5` | 2px | Micro-adjustments only |
+| `1.5` | 6px | Button vertical padding |
+| `2.5` | 10px | Navigation item padding |
 
-**Allowed Tailwind spacing values:**
-| Class | Pixels | Use |
-|-------|--------|-----|
-| `1` | 4px | Minimal spacing |
-| `2` | 8px | Tight spacing |
-| `3` | 12px | Small spacing |
-| `4` | 16px | Default spacing |
-| `5` | 20px | Medium spacing |
-| `6` | 24px | Relaxed spacing |
-| `8` | 32px | Spacious spacing |
-| `10` | 40px | Large spacing |
-| `12` | 48px | Section spacing |
+### Padding Patterns
 
-**Forbidden:**
+**Components:**
 ```jsx
-// ❌ NEVER use arbitrary odd values
+// Buttons
+<button className="px-4 py-2">Standard</button>
+<button className="px-6 py-3">Large</button>
+<button className="px-2.5 py-1.5">Small</button>
+
+// Cards
+<div className="p-4">Standard card</div>
+<div className="p-6">Spacious card</div>
+<div className="p-8">Feature card</div>
+
+// Inputs
+<input className="px-3 py-2" />
+
+// Navigation items
+<a className="px-4 py-2.5">Nav item</a>
+```
+
+**Sections:**
+```jsx
+// Page sections
+<section className="py-12">Standard section</section>
+<section className="py-16">Large section</section>
+<section className="py-20">Hero section</section>
+
+// Container padding
+<div className="px-4 md:px-8">Responsive container</div>
+```
+
+### Margin Patterns
+
+**Vertical rhythm:**
+```jsx
+// Between elements
+<h2 className="mb-4">Heading</h2>
+<p className="mb-6">Paragraph with space after</p>
+
+// Between sections
+<section className="mb-12">Section</section>
+
+// Form fields
+<div className="mb-4">
+  <label>...</label>
+  <input />
+</div>
+```
+
+**Horizontal centering:**
+```jsx
+<div className="mx-auto max-w-screen-xl">Centered container</div>
+```
+
+### Gap Patterns
+
+**Prefer `gap` over margins for flex/grid layouts:**
+
+```jsx
+// Flex layouts
+<div className="flex gap-2">Tight items</div>
+<div className="flex gap-4">Standard items</div>
+<div className="flex gap-8">Spacious items</div>
+
+// Grid layouts
+<div className="grid grid-cols-3 gap-4">Standard grid</div>
+<div className="grid grid-cols-2 gap-8">Feature grid</div>
+
+// Vertical stacks
+<div className="flex flex-col gap-4">Form fields</div>
+<div className="flex flex-col gap-8">Sections</div>
+```
+
+### Forbidden Spacing Values
+
+**Never use these:**
+
+```jsx
+// ❌ Arbitrary pixel values
 <div className="p-[9px]">...</div>
 <div className="p-[13px]">...</div>
-<div style={{ padding: '11px' }}>...</div>
+<div className="m-[7px]">...</div>
 
-// ✅ Use Tailwind's even scale
-<div className="p-2">...</div>  // 8px
-<div className="p-3">...</div>  // 12px
-<div className="p-4">...</div>  // 16px
+// ❌ Arbitrary decimals
+<div className="m-[3.375rem]">...</div>
+<div className="p-[1.2rem]">...</div>
+
+// ❌ Negative decimals for alignment hacks
+<div className="mt-[-0.5rem]">...</div>
+
+// ❌ Inline styles for spacing
+<div style={{ padding: '11px' }}>...</div>
+<div style={{ margin: '13px 17px' }}>...</div>
+```
+
+**If you need fine adjustment:**
+- Use `0.5`, `1.5`, or `2.5` from the half-step scale
+- If those don't work, reconsider the layout — the design should fit the scale
+
+### Quick Reference
+
+**Most common patterns:**
+```
+Button padding:     px-4 py-2 (standard), px-6 py-3 (large)
+Card padding:       p-4 (standard), p-6 (spacious)
+Input padding:      px-3 py-2
+Section padding:    py-12 (standard), py-16 (large)
+Element gap:        gap-2 (tight), gap-4 (standard)
+Section gap:        gap-8 (standard), gap-12 (large)
+Form field margin:  mb-4
+Heading margin:     mb-4 (h3+), mb-6 (h2), mb-8 (h1)
+```
+
+**Responsive spacing:**
+```jsx
+// Increase spacing at larger breakpoints
+<section className="py-8 md:py-12 lg:py-16">...</section>
+<div className="px-4 md:px-8 lg:px-12">...</div>
+<div className="gap-4 md:gap-6 lg:gap-8">...</div>
 ```
 
 ---
