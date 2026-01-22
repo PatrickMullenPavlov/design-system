@@ -35,6 +35,187 @@ module.exports = {
 
 ---
 
+## ⛔ NEVER DO THIS (Anti-Patterns)
+
+**These are hard rules. Violations will cause visual inconsistency.**
+
+### Colors
+- ❌ **NEVER** use raw Tailwind grays: `zinc-*`, `stone-*`, `slate-*`, `gray-*`, `neutral-*`
+- ❌ **NEVER** use arbitrary hex colors: `bg-[#f5f5f5]`, `text-[#333]`
+- ❌ **NEVER** use bright/saturated default Tailwind colors
+
+### Containers
+- ❌ **NEVER** create outline-only containers (border without background fill)
+- ❌ **NEVER** use dashed borders for content areas
+- ❌ **NEVER** use `rounded-2xl` or `rounded-3xl` for cards (use `rounded-lg`)
+
+### Typography
+- ❌ **NEVER** write custom `<h1>`, `<h2>`, `<h3>` elements — use `<SectionHeader>`
+- ❌ **NEVER** use arbitrary font sizes: `text-[14px]`, `text-[15px]`
+- ❌ **NEVER** use arbitrary font weights: `font-[450]`, `font-[550]`
+- ❌ **NEVER** use fonts other than Circular
+
+### Buttons & Rounding
+- ❌ **NEVER** use `rounded-full` except on `PrimaryButton`
+- ❌ **NEVER** create custom button styles — use the button components
+- ❌ **NEVER** use pill shapes on cards, containers, or inputs
+
+### Spacing
+- ❌ **NEVER** use arbitrary spacing: `p-[13px]`, `m-[7px]`, `gap-[9px]`
+- ❌ **NEVER** use inline styles for spacing
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║  If you catch yourself typing [  ] for any Tailwind value,        ║
+║  STOP and find the correct design system token instead.           ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## ✅ REQUIRED Components
+
+**These components MUST be used. Do not create custom implementations.**
+
+| Instead of...              | You MUST use...                          |
+|----------------------------|------------------------------------------|
+| Custom `<h1>`, `<h2>`, `<h3>` | `<SectionHeader size="xl/lg/md/sm">` |
+| Custom heading styles      | `<SectionHeader>` component              |
+| Custom primary button      | `<PrimaryButton>` component              |
+| Custom secondary button    | `<SecondaryButton>` component            |
+| Custom icon button         | `<IconButton>` component                 |
+| Custom text input          | `<TextInput>` component                  |
+| Custom select dropdown     | `<SelectInput>` component                |
+| Custom alert/message       | `<Alert>` component                      |
+| Custom modal/dialog        | `<Modal>` component                      |
+| Custom card container      | `<Card>` component                       |
+
+```jsx
+// ❌ WRONG - custom heading
+<h1 className="text-4xl font-bold">Welcome</h1>
+
+// ✅ CORRECT - use SectionHeader
+<SectionHeader title="Welcome" size="xl" />
+
+// ❌ WRONG - custom button
+<button className="bg-black text-white px-4 py-2 rounded-full">Submit</button>
+
+// ✅ CORRECT - use PrimaryButton
+<PrimaryButton label="Submit" />
+```
+
+---
+
+## 🔄 Migration Patterns
+
+**When applying the design system to existing code, use these replacements:**
+
+### Colors
+| If you see...                          | Replace with...              |
+|----------------------------------------|------------------------------|
+| `text-zinc-*`, `text-stone-*`          | `text-body-text-*`           |
+| `text-slate-*`, `text-neutral-*`       | `text-body-text-*`           |
+| `text-gray-900`, `text-gray-800`       | `text-body-text`             |
+| `text-gray-600`, `text-gray-500`       | `text-body-text-lighter`     |
+| `text-gray-400`, `text-gray-300`       | `text-body-text-lightest`    |
+| `bg-zinc-*`, `bg-stone-*`, `bg-slate-*`| `bg-trig-bg-*`               |
+| `bg-gray-50`, `bg-gray-100`            | `bg-trig-bg-lighter`         |
+| `bg-gray-200`                          | `bg-trig-bg`                 |
+| `border-gray-*`                        | `border-rule-color`          |
+
+### Containers
+| If you see...                          | Replace with...              |
+|----------------------------------------|------------------------------|
+| `border border-gray-200` (no bg)       | `bg-trig-bg-lighter`         |
+| `border border-gray-300` (no bg)       | `bg-trig-bg-lighter`         |
+| `ring-1 ring-gray-200` (no bg)         | `bg-trig-bg-lighter`         |
+| `rounded-2xl` on cards                 | `rounded-lg`                 |
+| `rounded-3xl` on cards                 | `rounded-lg`                 |
+
+### Typography
+| If you see...                          | Replace with...              |
+|----------------------------------------|------------------------------|
+| `<h1 className="...">Title</h1>`       | `<SectionHeader title="Title" size="xl" />` |
+| `<h2 className="...">Title</h2>`       | `<SectionHeader title="Title" size="lg" />` |
+| `<h3 className="...">Title</h3>`       | `<SectionHeader title="Title" size="md" />` |
+| `text-[14px]`, `text-[15px]`           | `text-sm` or `text-base`     |
+| `text-[13px]`                          | `text-xs` or `text-sm`       |
+
+### Buttons
+| If you see...                          | Replace with...              |
+|----------------------------------------|------------------------------|
+| Custom primary button markup           | `<PrimaryButton label="..." />` |
+| Custom secondary button markup         | `<SecondaryButton label="..." />` |
+| `rounded-full` on non-primary buttons  | `rounded-md`                 |
+
+---
+
+## 📊 Visual Reference
+
+### Container Styling
+
+```
+❌ WRONG — Outline Only (no background):
+┌─────────────────────────────────┐
+│                                 │
+│   border border-gray-200        │
+│   (empty, cold, clinical)       │
+│                                 │
+└─────────────────────────────────┘
+
+✅ CORRECT — Background Fill:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓                                 ▓
+▓   bg-trig-bg-lighter            ▓
+▓   (warm, filled, intentional)   ▓
+▓                                 ▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+✅ CORRECT — Flash Pattern:
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+▒                                 ▒
+░   flash class                   ░
+▒   (subtle diagonal stripes)     ▒
+░                                 ░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+```
+
+### Button Rounding
+
+```
+PrimaryButton — ONLY element with pill shape:
+╭───────────────────────────────────╮
+│         rounded-full              │
+╰───────────────────────────────────╯
+
+Everything else — subtle corners:
+┌───────────────────────────────────┐
+│         rounded-md                │
+└───────────────────────────────────┘
+```
+
+### Card Rounding
+
+```
+❌ WRONG — Too rounded:
+╭─────────────────────────────────────╮
+│                                     │
+│   rounded-2xl or rounded-3xl        │
+│   (too soft, not brand)             │
+│                                     │
+╰─────────────────────────────────────╯
+
+✅ CORRECT — Subtle corners:
+┌─────────────────────────────────────┐
+│                                     │
+│   rounded-lg                        │
+│   (precise, intentional)            │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+---
+
 ## Pre-Flight Checklist
 
 **Before submitting any UI work, verify ALL of the following:**

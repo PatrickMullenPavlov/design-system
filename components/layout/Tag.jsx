@@ -14,7 +14,7 @@ export default function Tag({ label, url, tagColor = "default" }) {
     white: "text-white",
   };
 
-  const className = `my-auto inline-block text-[11px] uppercase tracking-wider font-light animate ${styles[tagColor]}`;
+  const className = `my-auto inline-block text-xs uppercase tracking-wide font-light transition-colors ${styles[tagColor]}`;
 
   return (
     <div className={className}>
