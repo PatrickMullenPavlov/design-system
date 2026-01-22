@@ -93,6 +93,12 @@ const RULES = [
     message: "Communications palette is for marketing only, not product UI",
     severity: "warning",
   },
+  {
+    name: "forbidden-radius",
+    pattern: /rounded-(?:2xl|3xl)\b/g,
+    message: "Use rounded-lg for cards, not rounded-2xl/3xl",
+    severity: "error",
+  },
 ];
 
 // =============================================================================

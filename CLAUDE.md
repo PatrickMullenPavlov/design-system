@@ -216,6 +216,277 @@ Everything else — subtle corners:
 
 ---
 
+## 📝 Text Color Hierarchy
+
+**Use this guide to choose the right text color:**
+
+| Class                     | Use for                                              |
+|---------------------------|------------------------------------------------------|
+| `text-body-text`          | Primary content, headings, important text, labels    |
+| `text-body-text-light`    | Secondary content, supporting text, subheadings      |
+| `text-body-text-lighter`  | Tertiary content, descriptions, captions, help text  |
+| `text-body-text-lightest` | Placeholder text, disabled states, hints, timestamps |
+
+**On dark backgrounds:**
+
+| Class                          | Use for                                    |
+|--------------------------------|--------------------------------------------|
+| `text-light-body-text`         | Primary content on dark                    |
+| `text-light-body-text-light`   | Secondary content on dark                  |
+| `text-light-body-text-lighter` | Tertiary/muted content on dark             |
+
+```jsx
+// Example hierarchy
+<h3 className="text-body-text font-semibold">Account Overview</h3>
+<p className="text-body-text-light">Monthly revenue summary</p>
+<span className="text-body-text-lighter">Last updated 2 hours ago</span>
+<span className="text-body-text-lightest">ID: abc-123</span>
+```
+
+---
+
+## 📐 SectionHeader Size Guide
+
+**Use this guide to choose the right SectionHeader size:**
+
+| Size      | Use for                                              | Example context                    |
+|-----------|------------------------------------------------------|------------------------------------|
+| `xl`      | Page hero, primary landing section                   | Homepage hero, main page title     |
+| `lg`      | Major page sections, feature blocks                  | "Features", "How it works"         |
+| `lgLight` | Major sections needing lighter visual weight         | Long-form content, less aggressive |
+| `md`      | Subsections, card groups, content blocks             | "Recent activity", "Settings"      |
+| `sm`      | Card headers, sidebar sections, minor headings       | Card titles, panel headers         |
+| `xs`      | Labels, metadata headers, inline section markers     | "Details", "Configuration"         |
+
+```jsx
+// Page hero
+<SectionHeader size="xl" title="Welcome to Trig" description="AI-powered customer engagement" />
+
+// Major section
+<SectionHeader size="lg" tag="Features" title="Everything you need" />
+
+// Card group header
+<SectionHeader size="md" title="Recent Campaigns" alignment="left" />
+
+// Card header
+<SectionHeader size="sm" title="Campaign Details" alignment="left" />
+
+// Metadata label
+<SectionHeader size="xs" title="Advanced Settings" alignment="left" />
+```
+
+---
+
+## 🌗 Dark Mode Patterns
+
+**Light mode to dark mode mappings:**
+
+| Light Mode            | Dark Mode                    |
+|-----------------------|------------------------------|
+| `bg-white`            | `dark:bg-trig-bg-darker`     |
+| `bg-trig-bg`          | `dark:bg-trig-bg-darkest`    |
+| `bg-trig-bg-lighter`  | `dark:bg-trig-bg-dark`       |
+| `bg-green-10`         | `dark:bg-green-900/20`       |
+| `bg-red-10`           | `dark:bg-red-900/20`         |
+| `bg-blue-10`          | `dark:bg-blue-900/20`        |
+| `bg-orange-10`        | `dark:bg-orange-900/20`      |
+| `text-body-text`      | `dark:text-light-body-text`  |
+| `text-body-text-lighter` | `dark:text-light-body-text-lighter` |
+| `border-rule-color`   | `dark:border-white/10`       |
+
+```jsx
+// Card with dark mode support
+<div className="bg-trig-bg-lighter dark:bg-trig-bg-dark rounded-lg p-4">
+  <h3 className="text-body-text dark:text-light-body-text font-semibold">Title</h3>
+  <p className="text-body-text-lighter dark:text-light-body-text-lighter">Description</p>
+</div>
+
+// Status badge with dark mode
+<div className="bg-green-10 dark:bg-green-900/20 text-green px-2 py-1 rounded-md">
+  Active
+</div>
+```
+
+---
+
+## 🔢 Arbitrary Value Policy
+
+**What's allowed vs. forbidden:**
+
+| Category        | ❌ NEVER                           | ✅ OK                              |
+|-----------------|------------------------------------|------------------------------------|
+| Font sizes      | `text-[11px]`, `text-[13px]`       | `text-xs`, `text-sm`, `text-base`  |
+| Font weights    | `font-[450]`, `font-[550]`         | `font-light`, `font-medium`        |
+| Colors          | `bg-[#123456]`, `text-[#fff]`      | `bg-trig-bg`, `text-body-text`     |
+| Spacing         | `p-[13px]`, `m-[7px]`              | `p-4`, `m-2`, `gap-6`              |
+| Half-steps      | —                                  | `p-1.5`, `p-2.5`, `gap-0.5` ✅     |
+| Border radius   | `rounded-[10px]`                   | `rounded-md`, `rounded-lg`         |
+
+**Half-step spacing (0.5, 1.5, 2.5, 3.5) is permitted** when the full steps don't fit:
+
+```jsx
+// ✅ OK - Tailwind's built-in half-steps
+<button className="px-2.5 py-1.5">Small button</button>
+<div className="gap-0.5">Tight gap</div>
+
+// ❌ NEVER - arbitrary values
+<button className="px-[11px] py-[7px]">Bad button</button>
+<div className="gap-[3px]">Bad gap</div>
+```
+
+---
+
+## 📋 Copy-Paste Patterns
+
+### Card with Header
+
+```jsx
+<Card>
+  <SectionHeader
+    size="sm"
+    title="Card Title"
+    description="Optional description text"
+    alignment="left"
+  />
+  <div className="mt-4">
+    {/* Card content */}
+  </div>
+</Card>
+```
+
+### Card with Visual + Content
+
+```jsx
+<div className="rounded-lg bg-trig-bg-lighter dark:bg-trig-bg-dark overflow-hidden">
+  {/* Visual area with flash background */}
+  <div className="flash p-6">
+    <img src="/illustration.svg" alt="" className="w-full h-auto" />
+  </div>
+  {/* Content area */}
+  <div className="p-5">
+    <h3 className="text-base font-semibold text-body-text dark:text-light-body-text mb-2">
+      Feature Title
+    </h3>
+    <p className="text-sm text-body-text-lighter dark:text-light-body-text-lighter">
+      Feature description goes here.
+    </p>
+  </div>
+</div>
+```
+
+### Status Alert
+
+```jsx
+<Alert type="success" title="Campaign Launched" message="Your campaign is now live." />
+
+// Or manually:
+<div className="flex items-start gap-3 p-4 rounded-lg bg-green-10 dark:bg-green-900/20">
+  <CheckCircleIcon className="w-5 h-5 text-green flex-shrink-0" />
+  <div>
+    <p className="text-sm font-medium text-body-text dark:text-light-body-text">Success</p>
+    <p className="text-sm text-body-text-lighter dark:text-light-body-text-lighter">
+      Your changes have been saved.
+    </p>
+  </div>
+</div>
+```
+
+### Form Field Group
+
+```jsx
+<div className="space-y-4">
+  <TextInput
+    label="Campaign Name"
+    description="Choose a memorable name"
+    placeholder="e.g., Q1 Onboarding"
+    value={name}
+    onChange={setName}
+    required
+  />
+  <SelectInput
+    label="Target Segment"
+    placeholder="Select a segment"
+    options={segments}
+    value={segment}
+    onChange={setSegment}
+    required
+  />
+  <div className="flex gap-2 pt-4">
+    <PrimaryButton label="Create Campaign" onClick={handleCreate} />
+    <SecondaryButton label="Cancel" onClick={handleCancel} />
+  </div>
+</div>
+```
+
+### Page Section
+
+```jsx
+<Section>
+  <SectionHeader
+    size="lg"
+    tag="Features"
+    title="Everything you need"
+    description="Powerful tools for customer engagement"
+    alignment="center"
+  />
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+    {features.map((feature) => (
+      <Card key={feature.id}>
+        {/* Feature content */}
+      </Card>
+    ))}
+  </div>
+</Section>
+```
+
+### Empty State
+
+```jsx
+<EmptyState
+  title="No campaigns yet"
+  description="Create your first campaign to start engaging customers"
+  buttonLabel="Create Campaign"
+  onClick={() => navigate("/campaigns/new")}
+/>
+```
+
+---
+
+## 🔍 Automated Validation
+
+**The design system includes a validation script.** Run it to catch violations:
+
+```bash
+# Check your entire src folder
+node node_modules/@trig/design-system/scripts/validate.js src/
+
+# Check a specific file
+node node_modules/@trig/design-system/scripts/validate.js src/components/MyComponent.jsx
+```
+
+**Add to your package.json:**
+
+```json
+{
+  "scripts": {
+    "lint:design": "node node_modules/@trig/design-system/scripts/validate.js src/"
+  }
+}
+```
+
+**What it checks:**
+- ❌ Raw Tailwind grays (`zinc-*`, `stone-*`, `slate-*`, `gray-*`)
+- ❌ Arbitrary font sizes (`text-[14px]`)
+- ❌ Arbitrary spacing (`p-[13px]`)
+- ❌ Arbitrary colors (`bg-[#fff]`)
+- ❌ Invalid font sizes (`text-md` — use `text-base`)
+- ❌ Radial gradients
+- ⚠️ Outline-only containers (border without background)
+
+**Run before every commit** to catch issues early.
+
+---
+
 ## Pre-Flight Checklist
 
 **Before submitting any UI work, verify ALL of the following:**
