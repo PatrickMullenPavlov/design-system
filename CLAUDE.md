@@ -10,6 +10,7 @@ This document provides prescriptive rules for maintaining consistent styling acr
 - Updates `tailwind.config.js` to use the Trig preset
 - Adds font/style imports to your CSS file
 - Copies this CLAUDE.md to your project root
+- Installs a pre-commit hook that validates code before each commit
 
 **If automatic setup didn't work**, manually configure:
 
@@ -454,7 +455,30 @@ Everything else — subtle corners:
 
 ## 🔍 Automated Validation
 
-**The design system includes a validation script.** Run it to catch violations:
+**The design system includes a validation script and pre-commit hook.**
+
+### Pre-Commit Hook (Automatic)
+
+A pre-commit hook is installed automatically during `npm install`. It validates staged files before each commit:
+
+```
+🎨 Running Trig Design System validator...
+
+❌ src/components/Card.jsx:24 - Use locked font scale, not arbitrary sizes
+   Found: text-[14px]
+   Fix:   text-[14px] → text-sm
+
+❌ Design system violations found. Please fix before committing.
+```
+
+To bypass (not recommended): `git commit --no-verify`
+
+If git wasn't initialized during install, run later:
+```bash
+npm run setup-hooks
+```
+
+### Manual Validation
 
 ```bash
 # Check your entire src folder
@@ -474,16 +498,22 @@ node node_modules/@trig/design-system/scripts/validate.js src/components/MyCompo
 }
 ```
 
-**What it checks:**
-- ❌ Raw Tailwind grays (`zinc-*`, `stone-*`, `slate-*`, `gray-*`)
-- ❌ Arbitrary font sizes (`text-[14px]`)
-- ❌ Arbitrary spacing (`p-[13px]`)
-- ❌ Arbitrary colors (`bg-[#fff]`)
-- ❌ Invalid font sizes (`text-md` — use `text-base`)
-- ❌ Radial gradients
-- ⚠️ Outline-only containers (border without background)
+### What It Checks
 
-**Run before every commit** to catch issues early.
+| Violation | Example | Fix Suggestion |
+|-----------|---------|----------------|
+| Arbitrary font sizes | `text-[14px]` | `text-sm` |
+| Arbitrary spacing | `p-[13px]` | `p-3` |
+| Arbitrary weights | `font-[450]` | `font-normal` |
+| Arbitrary colors | `bg-[#fff]` | `bg-white` |
+| Raw Tailwind grays | `text-gray-600` | `text-body-text-lighter` |
+| Invalid font size | `text-md` | `text-base` |
+| Forbidden radius | `rounded-2xl` | `rounded-lg` |
+| Radial gradients | `bg-radial` | `bg-gradient-45` |
+| Comms colors in UI | `bg-comms-magenta` | `bg-blue-10` |
+| Outline-only containers | `border` (no bg) | `bg-trig-bg-lighter` |
+
+The validator shows **smart fix suggestions** based on the actual values found.
 
 ---
 

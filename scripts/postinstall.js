@@ -142,6 +142,89 @@ if (!cssUpdated) {
 }
 
 // =============================================================================
+// 4. INSTALL PRE-COMMIT HOOK
+// =============================================================================
+const gitDir = path.join(projectRoot, ".git");
+const hooksDir = path.join(gitDir, "hooks");
+const preCommitPath = path.join(hooksDir, "pre-commit");
+
+if (fs.existsSync(gitDir)) {
+  const hookScript = `#!/bin/sh
+#
+# Trig Design System Pre-Commit Hook
+# Validates code against design system rules before committing
+#
+
+VALIDATOR="node_modules/@trig/design-system/scripts/validate.js"
+
+if [ ! -f "$VALIDATOR" ]; then
+  exit 0
+fi
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\\.(jsx?|tsx?)$' | grep -v node_modules || true)
+
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+echo ""
+echo "🎨 Running Trig Design System validator..."
+echo ""
+
+ERRORS=0
+for FILE in $STAGED_FILES; do
+  if [ -f "$FILE" ]; then
+    node "$VALIDATOR" "$FILE" 2>&1
+    if [ $? -ne 0 ]; then
+      ERRORS=1
+    fi
+  fi
+done
+
+if [ $ERRORS -ne 0 ]; then
+  echo ""
+  echo "❌ Design system violations found. Please fix before committing."
+  echo "   To bypass: git commit --no-verify"
+  echo ""
+  exit 1
+fi
+
+exit 0
+`;
+
+  try {
+    // Ensure hooks directory exists
+    if (!fs.existsSync(hooksDir)) {
+      fs.mkdirSync(hooksDir, { recursive: true });
+    }
+
+    // Check if hook already exists
+    let shouldInstall = true;
+    if (fs.existsSync(preCommitPath)) {
+      const existing = fs.readFileSync(preCommitPath, "utf-8");
+      if (existing.includes("Trig Design System")) {
+        console.log("✅ Pre-commit hook already installed");
+        shouldInstall = false;
+      } else {
+        // Backup existing hook
+        fs.copyFileSync(preCommitPath, preCommitPath + ".backup");
+        console.log("📦 Backed up existing pre-commit hook");
+      }
+    }
+
+    if (shouldInstall) {
+      fs.writeFileSync(preCommitPath, hookScript, { mode: 0o755 });
+      console.log("✅ Installed pre-commit hook (validates before each commit)");
+    }
+  } catch (err) {
+    console.log("⚠️  Could not install pre-commit hook:", err.message);
+  }
+} else {
+  console.log("⚠️  No .git directory found - skipping pre-commit hook");
+  console.log("   Run 'npm run setup-hooks' after git init to install later");
+}
+
+// =============================================================================
 // DONE
 // =============================================================================
 console.log("\n🎉 Trig Design System ready!\n");

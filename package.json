@@ -78,6 +78,7 @@
   "scripts": {
     "postinstall": "node scripts/postinstall.js",
     "validate": "node scripts/validate.js",
-    "lint": "node scripts/validate.js"
+    "lint": "node scripts/validate.js",
+    "setup-hooks": "node scripts/setup-hooks.js"
   }
 }
