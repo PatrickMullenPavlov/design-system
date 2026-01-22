@@ -18,8 +18,11 @@ import { cx } from "../../utils/cx";
 /**
  * IconButton - Icon-only button component
  *
- * Small circular button with an icon. Used for inline actions
+ * Small button with an icon. Used for inline actions
  * like edit, delete, copy, etc.
+ *
+ * NOTE: IconButton uses rounded-md (subtle corners), NOT rounded-full.
+ * Only PrimaryButton uses fully rounded (pill) shape.
  *
  * @param {function} [onClick] - Click handler
  * @param {string} icon - Icon name from the available set
@@ -57,7 +60,7 @@ export default function IconButton({
       disabled={isDisabled}
       style={{ pointerEvents: isDisabled ? "none" : "auto" }}
       className={cx(
-        "ml-2 bg-slate-10 w-8 h-8 flex items-center justify-center rounded-full animate hover:bg-blue-10 hover:text-active-blue cursor-pointer",
+        "ml-2 bg-trig-bg w-8 h-8 flex items-center justify-center rounded-md transition-colors hover:bg-blue-10 hover:text-blue-800 cursor-pointer",
         variant === "confirm" && "hover:bg-green-10 hover:text-green",
         variant === "destructive" && "hover:bg-red-10 hover:text-red"
       )}

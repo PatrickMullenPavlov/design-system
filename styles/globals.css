@@ -59,17 +59,18 @@ h3 {
   @apply font-bold tracking-normal text-body-text;
 }
 
-/* Button size utilities */
+/* Button size utilities - use rounded-md by default (square edges) */
+/* Only PrimaryButton uses rounded-full */
 .btn-lg {
-  @apply animate rounded-full px-4 py-3 text-center text-sm font-semibold tracking-tight flex align-middle items-center justify-center;
+  @apply animate rounded-md px-6 py-3 text-center text-sm font-medium tracking-tight flex align-middle items-center justify-center;
 }
 
 .btn-md {
-  @apply animate rounded-full px-3.5 py-2 font-medium text-center text-[12px] tracking-wide flex align-middle items-center justify-center;
+  @apply animate rounded-md px-4 py-2 font-medium text-center text-xs tracking-wide flex align-middle items-center justify-center;
 }
 
 .btn-sm {
-  @apply animate rounded-full px-4 py-2 text-center text-xs font-semibold tracking-tight flex align-middle items-center justify-center;
+  @apply animate rounded-md px-3 py-1.5 text-center text-xs font-medium tracking-tight flex align-middle items-center justify-center;
 }
 
 /* Tag utility */

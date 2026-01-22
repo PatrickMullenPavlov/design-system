@@ -4,6 +4,37 @@ This document provides prescriptive rules for maintaining consistent styling acr
 
 ---
 
+## Setup
+
+**Setup is automatic.** When you run `npm install`, the postinstall script:
+- Updates `tailwind.config.js` to use the Trig preset
+- Adds font/style imports to your CSS file
+- Copies this CLAUDE.md to your project root
+
+**If automatic setup didn't work**, manually configure:
+
+```js
+// tailwind.config.js
+const trigConfig = require("@trig/design-system/tailwind.config");
+
+module.exports = {
+  presets: [trigConfig],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@trig/design-system/components/**/*.{js,jsx}",
+  ],
+};
+```
+
+```css
+/* In your main CSS file */
+@import "@trig/design-system/styles/fonts.css";
+@import "@trig/design-system/styles/globals.css";
+```
+
+---
+
 ## Pre-Flight Checklist
 
 **Before submitting any UI work, verify ALL of the following:**
@@ -58,6 +89,26 @@ This document provides prescriptive rules for maintaining consistent styling acr
 <div className="relative h-[500px]">
   <img src="/hero.jpg" className="object-cover w-full h-full" />
 </div>
+```
+
+### 5. Button Rounding: Primary Only
+- [ ] **PrimaryButton uses `rounded-full`** (pill shape) - this is the ONLY exception
+- [ ] All other buttons use `rounded-md` (subtle rounding)
+- [ ] Cards, containers, inputs use `rounded-md` or `rounded-lg`
+- [ ] **NEVER** use `rounded-full` on anything except PrimaryButton
+
+```jsx
+// ✅ CORRECT - PrimaryButton is pill-shaped
+<PrimaryButton label="Get Started" />  // Uses rounded-full internally
+
+// ✅ CORRECT - SecondaryButton has subtle rounding
+<SecondaryButton label="Cancel" />  // Uses rounded-md internally
+
+// ❌ WRONG - Don't make other buttons pill-shaped
+<button className="rounded-full bg-grey-100">Cancel</button>
+
+// ❌ WRONG - Don't make cards pill-shaped
+<div className="rounded-full bg-trig-bg-lighter p-4">...</div>
 ```
 
 ### Quick Visual Test
@@ -1198,6 +1249,17 @@ Muted:            text-light-body-text-lighter
 
 ## Button Patterns
 
+**CRITICAL: Button Rounding Rule**
+
+| Button Type | Rounding | Class |
+|-------------|----------|-------|
+| PrimaryButton | Pill (fully rounded) | `rounded-full` |
+| SecondaryButton | Subtle corners | `rounded-md` |
+| IconButton | Subtle corners | `rounded-md` |
+| CTAButton | Subtle corners | `rounded-md` |
+
+**PrimaryButton is the ONLY element in the entire design system that uses `rounded-full`.** Everything else uses subtle rounding (`rounded-md` or `rounded-lg`). This creates visual hierarchy — primary actions stand out with their distinctive pill shape.
+
 ### Primary Actions
 
 ```jsx
@@ -1258,47 +1320,41 @@ Muted:            text-light-body-text-lighter
 Use `CTAButton` for marketing page call-to-actions:
 
 ```jsx
-import CTAButton from "./components/buttons/CTAButton";
+import { CTAButton } from "@trig/design-system";
 
 // Standard CTA
-<CTAButton label="Get Started" href="/signup" />
+<CTAButton ctaText="Get Started" ctaUrl="/signup" />
 
 // Book a Demo (auto-shows icon, opens in new tab)
-<CTAButton label="Book a Demo" href="/demo" />
+<CTAButton ctaText="Book a Demo" ctaUrl="/demo" />
 
 // Light variant (for dark backgrounds)
-<CTAButton label="Learn More" href="/about" variant="light" />
+<CTAButton ctaText="Learn More" ctaUrl="/about" style="light" />
 
-// Small size
-<CTAButton label="See how" href="/features" size="sm" />
+// "See how" with feature link
+<CTAButton ctaText="See how" ctaUrl="/features" featureLinkUrl="/features/specific" />
 
-// With custom icon
+// With analytics callback
 <CTAButton
-  label="Download"
-  href="/download"
-  icon={<ArrowDownIcon className="w-4 h-4" />}
-  showIcon
+  ctaText="Get Started"
+  ctaUrl="/signup"
+  handleCtaClick={(text, url) => trackEvent("cta_click", { text, url })}
 />
 ```
 
 **Props:**
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `label` | string | required | Button text |
-| `href` | string | - | URL to navigate to |
-| `variant` | `"default"` \| `"light"` | `"default"` | Style variant |
-| `size` | `"sm"` \| `"md"` | `"md"` | Button size |
-| `showIcon` | boolean | auto | Show icon (auto for "Book a Demo") |
-| `openInNewTab` | boolean | auto | Open in new tab |
+| `ctaText` | string | required | Button text |
+| `ctaUrl` | string | - | URL to navigate to |
+| `featureLinkUrl` | string | - | Alternative URL for "See how" buttons |
+| `style` | `"default"` \| `"light"` | `"default"` | Style variant |
+| `handleCtaClick` | function | - | Callback fired on click (receives ctaText, ctaUrl) |
 
-**CSS class alternatives:**
-```jsx
-// Dark CTA (legacy)
-<button className="CTAButton">Get Started</button>
-
-// White CTA (legacy)
-<button className="whiteCTAButton">Learn More</button>
-```
+**Auto behaviors:**
+- `"Book a Demo"` — shows icon and opens in new tab
+- `"See how"` — uses `featureLinkUrl` if provided
+- Analytics tracked via `window.analytics` if available
 
 ---
 

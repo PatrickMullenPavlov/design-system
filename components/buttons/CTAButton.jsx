@@ -5,86 +5,86 @@ import { cx } from "../../utils/cx";
  * CTAButton - Call-to-action button for marketing pages
  *
  * A styled button for CTAs with optional icon support.
- * Uses the locked typography and spacing scales.
+ * "Book a Demo" automatically shows an icon and opens in a new tab.
  *
- * @param {string} label - Button text
- * @param {string} [href] - URL to navigate to
- * @param {"default"|"light"} [variant="default"] - Style variant
- * @param {"sm"|"md"} [size="md"] - Button size
- * @param {boolean} [showIcon=false] - Show icon (auto-enabled for "Book a Demo")
- * @param {React.ReactNode} [icon] - Custom icon component
- * @param {boolean} [openInNewTab=false] - Open link in new tab
- * @param {Function} [onClick] - Click handler
+ * NOTE: CTAButton uses rounded-md (subtle corners), NOT rounded-full.
+ * Only PrimaryButton uses fully rounded (pill) shape.
+ *
+ * @param {string} ctaText - Button text (required)
+ * @param {string} [ctaUrl] - URL to navigate to
+ * @param {string} [featureLinkUrl] - Alternative URL for "See how" buttons
+ * @param {"default"|"light"} [style="default"] - Style variant
+ * @param {Function} [handleCtaClick] - Click handler callback (receives ctaText, ctaUrl)
  * @param {string} [className] - Additional classes
  *
  * @example
- * <CTAButton label="Get Started" href="/signup" />
- * <CTAButton label="Book a Demo" href="/demo" openInNewTab />
- * <CTAButton label="Learn More" variant="light" href="/about" />
+ * <CTAButton ctaText="Get Started" ctaUrl="/signup" />
+ * <CTAButton ctaText="Book a Demo" ctaUrl="/demo" />
+ * <CTAButton ctaText="Learn More" style="light" ctaUrl="/about" />
  */
 export default function CTAButton({
-  label,
-  href,
-  variant = "default",
-  size = "md",
-  showIcon,
-  icon,
-  openInNewTab = false,
-  onClick,
+  ctaText,
+  ctaUrl,
+  handleCtaClick,
+  featureLinkUrl,
+  style = "default",
   className = "",
 }) {
-  if (!label) return null;
+  if (!ctaText) return null;
 
-  // Auto-show icon for "Book a Demo"
-  const shouldShowIcon = showIcon ?? label === "Book a Demo";
-  // Auto-open in new tab for "Book a Demo"
-  const shouldOpenNewTab = openInNewTab || label === "Book a Demo";
-
-  const handleClick = (e) => {
-    if (onClick) {
-      onClick(e);
+  const handleButtonClick = () => {
+    // Fire analytics callback if provided
+    if (handleCtaClick) {
+      handleCtaClick(ctaText, ctaUrl);
     }
 
-    if (href && !onClick) {
-      if (shouldOpenNewTab) {
-        window.open(href, "_blank");
-      } else {
-        window.location.href = href;
-      }
+    // Track via global analytics if available
+    if (typeof window !== "undefined" && window.analytics) {
+      window.analytics.track("CTA Click", {
+        title: ctaText,
+        slug: ctaUrl,
+      });
+    }
+
+    // Determine URL to open
+    const urlToOpen =
+      ctaText === "See how" && featureLinkUrl ? featureLinkUrl : ctaUrl;
+
+    if (!urlToOpen) return;
+
+    // "Book a Demo" opens in new tab
+    if (ctaText === "Book a Demo") {
+      window.open(urlToOpen, "_blank");
+    } else {
+      window.location.href = urlToOpen;
     }
   };
 
-  const sizeClasses = {
-    sm: "text-xs px-2.5 py-1.5 rounded-md",
-    md: "text-xs md:text-sm px-2.5 py-1.5 md:px-4 md:py-2.5 rounded-md md:rounded-full",
-  };
-
-  const variantClasses = {
-    default:
-      "bg-transparent text-body-text border border-body-text-lightest/50 hover:bg-body-text hover:text-white hover:border-body-text",
-    light:
-      "text-light-body-text border border-light-body-text hover:bg-white hover:text-body-text hover:border-white",
-  };
-
-  const IconComponent = icon || (shouldShowIcon ? SquaresPlusIcon : null);
+  // Style variants
+  const styleClasses =
+    style === "light"
+      ? "text-light-body-text border border-light-body-text hover:bg-white hover:text-body-text"
+      : "bg-transparent text-body-text border border-body-text-lightest/50 hover:bg-yellow hover:text-body-text hover:border-yellow";
 
   return (
-    <button
-      type="button"
-      className={cx(
-        "inline-flex items-center font-medium whitespace-nowrap transition-colors",
-        sizeClasses[size],
-        variantClasses[variant],
-        className
-      )}
-      onClick={handleClick}
-    >
-      {IconComponent && (
-        <span className="w-4 h-4 mr-1.5 md:w-5 md:h-5 md:mr-2">
-          {typeof IconComponent === "function" ? <IconComponent /> : IconComponent}
-        </span>
-      )}
-      {label}
-    </button>
+    <div className={cx("inline-block", className)}>
+      <button
+        type="button"
+        className={cx(
+          styleClasses,
+          // Uses rounded-md only (not rounded-full - only PrimaryButton uses pill shape)
+          "rounded-md hover:shadow-sm text-xs md:text-sm px-2.5 py-1.5 md:px-5 md:py-2.5",
+          "text-center inline-flex items-center transition-colors font-brand whitespace-nowrap"
+        )}
+        onClick={handleButtonClick}
+      >
+        {ctaText === "Book a Demo" && (
+          <div className="w-4 h-4 mr-1 md:w-5 md:h-5 md:mr-1.5">
+            <SquaresPlusIcon />
+          </div>
+        )}
+        {ctaText}
+      </button>
+    </div>
   );
 }

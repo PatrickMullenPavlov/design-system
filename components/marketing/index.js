@@ -6,3 +6,4 @@ export { default as Quote } from "./Quote";
 export { default as Testimonial, TestimonialGrid } from "./Testimonial";
 export { default as FeatureSection, FeatureWithBenefits } from "./FeatureSection";
 export { default as TabbedFeatures } from "./TabbedFeatures";
+export { default as Footer } from "./Footer";
